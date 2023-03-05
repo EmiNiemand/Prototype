@@ -226,10 +226,10 @@ namespace AI
             var worldPos = gridToWorldPosition(position);
             foreach (var col in colliders)
             {
-                if (worldPos.x > col.transform.position.x - col.bounds.size.x / 2 - 1f &&
-                    worldPos.z > col.transform.position.z - col.bounds.size.z / 2 - 1f &&
-                    worldPos.x < col.transform.position.x + col.bounds.size.x / 2 + 1f &&
-                    worldPos.z < col.transform.position.z + col.bounds.size.z / 2 + 1f) return false;
+                if (worldPos.x > col.transform.position.x - col.bounds.size.x / 2 - 1.0f &&
+                    worldPos.z > col.transform.position.z - col.bounds.size.z / 2 - 1.0f &&
+                    worldPos.x < col.transform.position.x + col.bounds.size.x / 2 + 1.0f &&
+                    worldPos.z < col.transform.position.z + col.bounds.size.z / 2 + 1.0f) return false;
             }
             return true;
         }

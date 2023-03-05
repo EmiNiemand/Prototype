@@ -9,11 +9,12 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<GameObject> pathPoints;
-
+    
     public UnityEvent<GameObject> startBeingAlarmedEvent;
     public UnityEvent stopBeingAlarmedEvent;
     public Dictionary<int, Collider> hitColliders;
-
+    private RaycastHit[] hits;
+    
     private Rigidbody rb;
     
     public bool isAlarmed = false;
@@ -26,10 +27,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed;
     
     private float timer = 0;
-    private float setPathTimer = 0;
 
     private List<Vector3> path;
     private List<Vector3> backPath;
+
+    private Vector3 previousPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,10 @@ public class Enemy : MonoBehaviour
         hitColliders = new Dictionary<int, Collider>();
         backPath = new List<Vector3>();
         path = new List<Vector3>();
+        hits = new RaycastHit[100];
 
+        previousPosition = transform.position;
+        
         if (startBeingAlarmedEvent == null) startBeingAlarmedEvent = new UnityEvent<GameObject>();
         startBeingAlarmedEvent.AddListener(StartBeingAlarmed);
         
@@ -55,7 +60,8 @@ public class Enemy : MonoBehaviour
     {
         if (isAlarmed)
         {
-            if (timer > timeToStopSearching) stopBeingAlarmedEvent.Invoke();
+            if (timer > timeToStopSearching || path.Count == 0) stopBeingAlarmedEvent.Invoke();
+            previousPosition = transform.position;
             timer += Time.deltaTime;
         }
         
@@ -79,18 +85,17 @@ public class Enemy : MonoBehaviour
 
             else if (isAlarmed)
             {
-                timer = 0;
                 if (path == null)
                 {
                     stopBeingAlarmedEvent.Invoke();
-                    return;
                 }
             }
         }
     }
-
+    
     private void StartBeingAlarmed(GameObject targetObject)
     {
+        hitColliders.Clear();
         target = targetObject;
         isAlarmed = true;
         path.Clear();
@@ -118,8 +123,12 @@ public class Enemy : MonoBehaviour
 
     void SetNewPath()
     {
-        float minDistance = Vector3.Distance(transform.position, new Vector3(pathPoints[0].transform.position.x, 
+        float minDistance;
+        if (backPath.Count == 0) minDistance = Vector3.Distance(transform.position, 
+            new Vector3(pathPoints[0].transform.position.x, 0, pathPoints[0].transform.position.z));
+        else minDistance = Vector3.Distance(backPath.Last(), new Vector3(pathPoints[0].transform.position.x, 
             0, pathPoints[0].transform.position.z));
+        
         int i = 0;
         foreach (var point in pathPoints)
         {
@@ -137,56 +146,36 @@ public class Enemy : MonoBehaviour
     
     void SetNewPathWithPathFinding()
     {
-        for (int i = 0; i < 60; i++)
+        path.Clear();
+        
+        for (int i = 0; i < 36; i++)
         {
-            Vector3 direction = Quaternion.AngleAxis(6 * i, Vector3.up) * Vector3.right;
+            Vector3 direction = Quaternion.AngleAxis(10f * i, Vector3.up) * Vector3.right;
             Vector3 position = transform.position;
-            Vector3 origin = new Vector3(position.x, position.y + bCollider.height / 2, position.z);
-            RaycastHit[] hits = Physics.RaycastAll(origin, direction);
-            Debug.DrawRay(origin, direction, Color.red, 0.5f);
-            foreach (var hit in hits)
+            Vector3 origin = new Vector3(position.x, position.y + bCollider.height / 4, position.z);
+            int rayHits = Physics.RaycastNonAlloc(origin, direction, hits, 50f);
+            /*Debug.DrawRay(origin, direction, Color.red, 0.5f);*/
+            for (int j = 0; j < rayHits; j++)
             {
-                if (!hitColliders.ContainsKey(hit.collider.GetInstanceID())) hitColliders.Add(hit.collider.GetInstanceID(), hit.collider);
+                if (!hitColliders.ContainsKey(hits[j].collider.GetInstanceID()) && hits[j].collider.CompareTag("Obstacles")) hitColliders.Add(hits[j].collider.GetInstanceID(), hits[j].collider);
             }
-            origin = new Vector3(position.x, position.y - bCollider.height / 2 + 0.1f, position.z);
-            hits = Physics.RaycastAll(origin, direction);
-            Debug.DrawRay(origin, direction, Color.red, 0.5f);
-            foreach (var hit in hits)
+            origin = new Vector3(position.x, position.y - bCollider.height / 4, position.z);
+            rayHits = Physics.RaycastNonAlloc(origin, direction, hits, 50f);
+            /*Debug.DrawRay(origin, direction, Color.red, 0.5f);*/
+            for (int j = 0; j < rayHits; j++)
             {
-                if (!hitColliders.ContainsKey(hit.collider.GetInstanceID())) hitColliders.Add(hit.collider.GetInstanceID(), hit.collider);
+                if (!hitColliders.ContainsKey(hits[j].collider.GetInstanceID()) && hits[j].collider.CompareTag("Obstacles")) hitColliders.Add(hits[j].collider.GetInstanceID(), hits[j].collider);
             }
         }
-        
+
         // Find path using A*
         path = GetComponent<AI.Pathfinding>().FindPath(transform.position, target.transform.position);
 
         if(path.Count == 0) stopBeingAlarmedEvent.Invoke();
         
-        else
+        for (int i = 0; i < path.Count - 1; i++)
         {
-            /*List<Vector3> destinations = new List<Vector3>();
-        
-            // Bezier to path smoothing
-            for (int i = 0; i < path.Count - 1; i ++)
-            {
-                var t = Vector2.Distance(new Vector2(path[i].x, path[i].z), new Vector2(path[i + 1].x, 
-                    path[i + 1].z)) / 100;
-                for (float j = 0; j <= 1; j += t)
-                {
-                    Vector2 vec = Mathf.Pow((1 - j), 2) * new Vector2(path[i].x, path[i].z) +
-                                  2 * (1 - j) * j * new Vector2(path[i + 1].x, path[i].z) +
-                                  Mathf.Pow(j, 2) * new Vector2(path[i + 1].x, path[i + 1].z);
-                    
-                    destinations.Add(new Vector3(vec.x, 0, vec.y));
-                }
-            }
-
-            path = destinations;*/
-            
-            for (int i = 0; i < path.Count - 1; i++)
-            {
-                Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
-            }
+            Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
         }
     }
 }
