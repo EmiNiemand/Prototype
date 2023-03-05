@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< Updated upstream
   - Dywan
   - ElementDoBujana
+=======
+  - Wrong
+  - Enemy
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

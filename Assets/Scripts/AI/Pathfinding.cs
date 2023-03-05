@@ -33,15 +33,11 @@ namespace AI
         private List<Collider> colliders;
         private const int STRAIGHT_MOVE_COST = 10;
         private const int DIAGONAL_MOVE_COST = 14;
-        private int cellSize;
-        int2 gridSize = new int2(25, 25);
+        private int cellSize = 1;
+        int2 gridSize = new int2(100, 100);
+        
 
-        private void Start()
-        {
-            cellSize = (int)GetComponent<CapsuleCollider>().radius * 2;
-        }
-
-        public List<Vector2> FindPath(Vector2 sPosition, Vector2 ePosition)
+        public List<Vector3> FindPath(Vector3 sPosition, Vector3 ePosition)
         {
             colliders = GetComponent<Enemy>().hitColliders.Values.ToList();
             
@@ -159,7 +155,7 @@ namespace AI
             if (endNode.IndexOfPreviousNode != -1)
             {
                 NativeList<int2> path = CalculatePath(nodeArray, endNode);
-                List<Vector2> result = new List<Vector2>();
+                List<Vector3> result = new List<Vector3>();
                 
                 for (int i = path.Length - 1; i >= 0; i--)
                 {
@@ -174,7 +170,7 @@ namespace AI
             openList.Dispose();
             closedList.Dispose();
 
-            return new List<Vector2>();
+            return new List<Vector3>();
         }
 
         private int2 worldToGridPosition(Vector3 position)
@@ -183,9 +179,10 @@ namespace AI
             Mathf.FloorToInt((position.z  - transform.position.z) / cellSize + gridSize.y / 2));
         }
 
-        private Vector2 gridToWorldPosition(int2 position)
+        private Vector3 gridToWorldPosition(int2 position)
         {
-            return new Vector2(Mathf.Round((position.x - gridSize.x / 2) * cellSize + transform.position.x), Mathf.Round((position.y - gridSize.y / 2) * cellSize + transform.position.z));
+            return new Vector3(Mathf.Round((position.x - gridSize.x / 2) * cellSize + transform.position.x), 
+                0, Mathf.Round((position.y - gridSize.y / 2) * cellSize + transform.position.z));
         }
         
         private NativeList<int2> CalculatePath(NativeArray<Node> nodeArray, Node endNode)
@@ -226,13 +223,13 @@ namespace AI
         
         private bool IsWalkable(int2 position)
         {
+            var worldPos = gridToWorldPosition(position);
             foreach (var col in colliders)
             {
-                var newCol = (BoxCollider)col;
-                if (position.x > newCol.transform.position.x - newCol.size.x / 2 &&
-                    position.y > newCol.transform.position.z - newCol.size.y / 2 &&
-                    position.x < newCol.transform.position.x + newCol.size.x / 2 &&
-                    position.y < newCol.transform.position.z + newCol.size.y / 2) return false;
+                if (worldPos.x > col.transform.position.x - col.bounds.size.x / 2 &&
+                    worldPos.z > col.transform.position.z - col.bounds.size.z / 2 &&
+                    worldPos.x < col.transform.position.x + col.bounds.size.x / 2 &&
+                    worldPos.z < col.transform.position.z + col.bounds.size.z / 2) return false;
             }
             return true;
         }

@@ -1,28 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class PathPoint
-{
-    public int number;
-    public GameObject point;
-}
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private List<PathPoint> pathPoints;
+    [SerializeField] private List<GameObject> pathPoints;
 
-    private UnityEvent<GameObject> startBeingAlarmedEvent;
-    private UnityEvent stopBeingAlarmedEvent;
+    public UnityEvent<GameObject> startBeingAlarmedEvent;
+    public UnityEvent stopBeingAlarmedEvent;
     public Dictionary<int, Collider> hitColliders;
-    private Dictionary<int, Vector3> normalPath;
 
     private Rigidbody rb;
     
-    private bool isAlarmed = false;
+    public bool isAlarmed = false;
 
     private int pathPointNumber = 0;
     private CapsuleCollider bCollider;
@@ -40,7 +34,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        normalPath = new Dictionary<int, Vector3>();
         hitColliders = new Dictionary<int, Collider>();
         path = new List<Vector3>();
 
@@ -52,40 +45,39 @@ public class Enemy : MonoBehaviour
 
         bCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
-        foreach (var pathPoint in pathPoints)
-        {
-            var pos = pathPoint.point.transform.position;
-            normalPath.Add(pathPoint.number, new Vector3(pos.x, 0, pos.z));
-        }
-        
-        path.Add(normalPath.GetValueOrDefault(pathPointNumber));
+
+        path.Add(new Vector3(pathPoints[pathPointNumber].transform.position.x, 0, pathPoints[pathPointNumber].transform.position.z));
     }
 
     // Update is called once per frame
     void Update()
     {
         var pos = transform.position;
-        if (Vector3.Distance(new Vector3(pos.x, 0, pos.z), path[0]) < 0.5f)
+        if (path.Count == 0)
         {
-            if (!isAlarmed)
+            return;
+        }
+        if (Vector3.Distance(new Vector3(pos.x, 0, pos.z), new Vector3(path[0].x, 0, path[0].z)) < 0.5f)
+        {
+            path.RemoveAt(0);
+            if (!isAlarmed && path.Count == 0)
             {
                 pathPointNumber++;
-                if (pathPointNumber >= normalPath.Count) pathPointNumber = 0;
-                path.RemoveAt(0);
-                path.Add(normalPath.GetValueOrDefault(pathPointNumber));
+                if (pathPointNumber >= pathPoints.Count) pathPointNumber = 0;
+                path.Add(new Vector3(pathPoints[pathPointNumber].transform.position.x, 0, pathPoints[pathPointNumber].transform.position.z));
             }
 
             else if (isAlarmed)
             {
-                path.RemoveAt(0);
                 if (path == null)
                 {
-                    //TODO: czy to oznacza że doszedł to miejsca i nikogo nie jebnął?
+                    stopBeingAlarmedEvent.Invoke();
+                    return;
                 }
             }
         }
-        
-        rb.MovePosition(transform.position + (path[0] - new Vector3(transform.position.x, 0, transform.position.z)).normalized * moveSpeed);
+        if(path.Count > 0) rb.MovePosition(transform.position + (path[0] - new Vector3(transform.position.x, 0, 
+            transform.position.z)).normalized * moveSpeed);
         
         if (!isAlarmed) return;
         if (timer > timeToStopSearching) stopBeingAlarmedEvent.Invoke();
@@ -114,17 +106,21 @@ public class Enemy : MonoBehaviour
 
     void SetNewPath()
     {
-        float minDistance = Vector3.Distance(transform.position, normalPath.GetValueOrDefault(0));
-        Vector3 newTarget = normalPath.GetValueOrDefault(0);
-        foreach (var position in normalPath)
+        float minDistance = Vector3.Distance(transform.position, new Vector3(pathPoints[0].transform.position.x, 
+            0, pathPoints[0].transform.position.z));
+        int i = 0;
+        foreach (var point in pathPoints)
         {
-            if (Vector3.Distance(transform.position, position.Value) <= minDistance)
+            var p = new Vector3(point.transform.position.x, 0, point.transform.position.z);
+            if (Vector3.Distance(transform.position, p) <= minDistance)
             {
-                newTarget = position.Value;
-                pathPointNumber = position.Key;
+                target = point;
+                pathPointNumber = i;
             }
+
+            i++;
         }
-        path.Add(newTarget);
+        SetNewPathWithPathFinding();
     }
     
     void SetNewPathWithPathFinding()
@@ -138,22 +134,20 @@ public class Enemy : MonoBehaviour
             Debug.DrawRay(origin, direction, Color.red, 0.5f);
             foreach (var hit in hits)
             {
-                hitColliders.Add(hit.colliderInstanceID, hit.collider);
+                /*Debug.Log(hit.colliderInstanceID);*/
+                if (!hitColliders.ContainsKey(hit.collider.GetInstanceID())) hitColliders.Add(hit.collider.GetInstanceID(), hit.collider);
             }
             origin = new Vector3(position.x, position.y - bCollider.height / 2 + 0.1f, position.z);
             hits = Physics.RaycastAll(origin, direction);
             Debug.DrawRay(origin, direction, Color.red, 0.5f);
             foreach (var hit in hits)
             {
-                hitColliders.Add(hit.colliderInstanceID, hit.collider);
+                if (!hitColliders.ContainsKey(hit.collider.GetInstanceID())) hitColliders.Add(hit.collider.GetInstanceID(), hit.collider);
             }
         }
-        var pathV2 = GetComponent<AI.Pathfinding>().FindPath(new Vector2(transform.position.x, transform.position.z),
-            new Vector2(target.transform.position.x, target.transform.position.z));
-        foreach (var pV2 in pathV2)
-        {
-            path.Add(new Vector3(pV2.x, 0, pV2.y));
-        }
+
+        path = GetComponent<AI.Pathfinding>().FindPath(transform.position, target.transform.position);
+        
         iterationCounter++;
     }
 }
