@@ -16,9 +16,10 @@ public class Target : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            if (enemies.Length == 0) return;
             foreach (var enemy in enemies)
             {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 25)
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 50)
                 {
                     if (enemy.GetComponent<Enemy>()) enemy.GetComponent<Enemy>().startBeingAlarmedEvent.Invoke(gameObject);
                 }
