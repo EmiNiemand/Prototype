@@ -24,7 +24,6 @@ public class PlayerEquipment : MonoBehaviour
         {
             isActive = false;
             uiDocument.rootVisualElement.Q("Container").visible = false;
-            // PlayerInventory.Instance.StoredItems
             Cursor.lockState = CursorLockMode.Locked;
         }
         else

@@ -61,6 +61,7 @@ namespace Assets.Scripts
             {
                 if (loadedItem.RootVisual == null) continue;
                 loadedItem.RootVisual.style.visibility = Visibility.Hidden;
+                m_Telegraph.style.visibility = Visibility.Hidden;
                 if (PlayerEquipment.instance.isActive)
                 {
                     loadedItem.RootVisual.style.visibility = Visibility.Visible;
