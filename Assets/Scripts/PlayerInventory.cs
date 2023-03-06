@@ -55,6 +55,19 @@ namespace Assets.Scripts
 
         private void Start() => LoadInventory();
 
+        private void Update()
+        {
+            foreach (StoredItem loadedItem in StoredItems)
+            {
+                if (loadedItem.RootVisual == null) continue;
+                loadedItem.RootVisual.style.visibility = Visibility.Hidden;
+                if (PlayerEquipment.instance.isActive)
+                {
+                    loadedItem.RootVisual.style.visibility = Visibility.Visible;
+                }
+            }
+        }
+
         /// <summary>
         /// Configure the UI by grabbing references and setting necessary properties
         /// </summary>
@@ -149,7 +162,7 @@ namespace Assets.Scripts
         private static void ConfigureInventoryItem(StoredItem item, ItemVisual visual)
         {
             item.RootVisual = visual;
-            visual.style.visibility = Visibility.Visible;
+            visual.style.visibility = Visibility.Hidden;
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
@@ -5,12 +6,14 @@ using Cursor = UnityEngine.Cursor;
 public class PlayerEquipment : MonoBehaviour
 {
     public bool isActive = false;
+    public static PlayerEquipment instance;
     UIDocument uiDocument;
     VisualElement visualElement;
     
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         uiDocument = GameObject.Find("Inventory").GetComponent<UIDocument>();
         uiDocument.rootVisualElement.Q("Container").visible = false;
     }
@@ -21,6 +24,7 @@ public class PlayerEquipment : MonoBehaviour
         {
             isActive = false;
             uiDocument.rootVisualElement.Q("Container").visible = false;
+            // PlayerInventory.Instance.StoredItems
             Cursor.lockState = CursorLockMode.Locked;
         }
         else
