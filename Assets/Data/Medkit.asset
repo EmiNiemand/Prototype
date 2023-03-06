@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494fc992b42a2714cb085994f912f4c4, type: 3}
+  m_Name: Medkit
+  m_EditorClassIdentifier: 
+  ID: da5f5408-4b10-4b9a-b979-c89a7b35be23
+  FriendlyName: Medkit
+  Description: A medium medkit that heals for 100 health.
+  SellPrice: 100
+  Icon: {fileID: 21300000, guid: 3e45963cc559bed43995a19a1249f44a, type: 3}
+  SlotDimension:
+    Height: 1
+    Width: 1
