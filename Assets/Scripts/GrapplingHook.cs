@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Camera;
     [SerializeField] private float HookRange;
     private LineRenderer _line;
     
@@ -21,14 +21,13 @@ public class GrapplingHook : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(lineStart, Player.transform.forward, out hit, HookRange))
+            if (Physics.Raycast(lineStart, Camera.transform.forward, out hit, HookRange))
             {
                 _line.SetPosition(1, hit.point);
-
             }
             else
             {
-                _line.SetPosition(1, lineStart + (Player.transform.forward * HookRange));
+                _line.SetPosition(1, lineStart + (Camera.transform.forward * HookRange));
             }
         }
     }
