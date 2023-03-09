@@ -1,0 +1,74 @@
+{
+    "name": "SoundActions",
+    "maps": [
+        {
+            "name": "Normal",
+            "id": "95c054c5-369a-4665-9de9-f70e47a0411b",
+            "actions": [
+                {
+                    "name": "Sound1",
+                    "type": "Button",
+                    "id": "79aadab3-7d15-4a05-88f3-c407f8cb5a02",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound2",
+                    "type": "Button",
+                    "id": "5e9db0e4-2db6-456b-be5f-11d699b9bf70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound3",
+                    "type": "Button",
+                    "id": "c0cb02e3-653a-4ef8-8095-d9d8f48accad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c6e9824-0918-472a-bbf6-46ddbe5a834e",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "758c1748-26b8-4f8e-b382-fd62080ece41",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e0edd97-7ab5-485a-8d88-3f5bfde549d8",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
