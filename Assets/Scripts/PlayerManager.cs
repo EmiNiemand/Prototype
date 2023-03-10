@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
     private PlayerMovement playerMovement;
-    private PlayerEquipment playerEquipment;
+    private PlayerShop playerShop;
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        playerEquipment = GetComponent<PlayerEquipment>();
+        playerShop = GetComponent<PlayerShop>();
     }
 
     void Update()
@@ -36,10 +36,11 @@ public class PlayerManager : MonoBehaviour
         // Debug.Log(delta);
         playerMovement.RotateCamera(delta);
     }
-    public void OnEquipment(InputAction.CallbackContext context)
+
+    public void OnShop(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        playerEquipment.ShowEquipment();
+        playerShop.ShowShop();
     }
     #endregion
 }

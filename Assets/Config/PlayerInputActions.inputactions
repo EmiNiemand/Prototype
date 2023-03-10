@@ -33,9 +33,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Equipment",
+                    "name": "Shop",
                     "type": "Button",
-                    "id": "719273d6-0a1f-4ff4-8c2f-0f97497a00be",
+                    "id": "63b43c21-6881-4df8-8a7e-232072cbe45f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -122,12 +122,12 @@
                 },
                 {
                     "name": "",
-                    "id": "273c8bde-cf97-4ded-8157-38315b3cd283",
+                    "id": "1b0b8c47-ee67-4089-9f5a-881ce37cb38d",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard+Mouse",
-                    "action": "Equipment",
+                    "action": "Shop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
