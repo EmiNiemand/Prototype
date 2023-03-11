@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(FreezeInput());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //TODO: improve this
         rigidbody.MovePosition(rigidbody.position + 
