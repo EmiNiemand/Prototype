@@ -9,9 +9,9 @@ public class PersonLogic : MonoBehaviour
     private float currSatisfaction = 0;
     private PersonMovement _personMovement;
     
-    public Genre favGenre;
-    public Instrument favInstrument;
-    public Pattern favPattern;
+    [HideInInspector] public Genre favGenre;
+    [HideInInspector] public Instrument favInstrument;
+    [HideInInspector] public Pattern favPattern;
     
     private GameObject Player;
     private Genre playerGenre;
@@ -21,8 +21,8 @@ public class PersonLogic : MonoBehaviour
 
     private bool isAlreadyPlaying = false;
     
-    public UnityEvent playerStartedPlaying;
-    public UnityEvent playerStoppedPlaying;
+    private UnityEvent playerStartedPlaying;
+    private UnityEvent playerStoppedPlaying;
     
     // Start is called before the first frame update
     void Start()

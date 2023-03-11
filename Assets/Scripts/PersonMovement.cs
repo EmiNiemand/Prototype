@@ -15,9 +15,8 @@ public class PersonMovement : MonoBehaviour
     private float timer = 0;
     private float speedMultiplier = 1.0f;
     
-    
-    public Dictionary<int, Collider> hitColliders;
-    public bool isAlarmed = false;
+    private Dictionary<int, Collider> hitColliders;
+    private bool isAlarmed = false;
 
     // Start is called before the first frame update
     void Start()
