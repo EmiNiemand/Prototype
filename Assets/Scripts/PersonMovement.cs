@@ -5,12 +5,10 @@ using UnityEngine.Events;
 
 public class PersonMovement : MonoBehaviour
 {
-    [SerializeField] private float timeToStopSearching = 2;
     [SerializeField] private float moveSpeed;
     
     private CapsuleCollider bCollider;
     private Rigidbody rb;
-    private RaycastHit[] hits;
     private List<Vector3> path;
     private Vector3 endTarget;
     private Vector3 previousTarget;
@@ -26,7 +24,6 @@ public class PersonMovement : MonoBehaviour
     {
         hitColliders = new Dictionary<int, Collider>();
         path = new List<Vector3>();
-        hits = new RaycastHit[50];
 
         bCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
