@@ -10,7 +10,7 @@ public class Sounds : MonoBehaviour
     public Image[] images;
 
     private AudioSource source;
-    private Color[] colors = new[] { Color.green, Color.magenta, Color.yellow};
+    private readonly Color[] colors = { Color.green, Color.magenta, Color.yellow};
 
     // Start is called before the first frame update
     void Start()
