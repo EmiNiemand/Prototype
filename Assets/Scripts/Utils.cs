@@ -12,6 +12,18 @@ public enum Genre
     Metal
 }
 
+public enum Instrument
+{
+    Guitar,
+    Drums,
+    Violin
+}
+    
+public enum Pattern
+{
+    UDUD, 
+}
+
 public class Utils : MonoBehaviour
 {
     // Start is called before the first frame update
