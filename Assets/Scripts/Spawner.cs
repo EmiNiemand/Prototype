@@ -31,38 +31,115 @@ public class Spawner : MonoBehaviour
         {
             for (int i = 0; i < minNumberOfSpawns - numberOfSpawned; i++)
             {
-                Vector3 position = new Vector3(Random.Range(-100, 100) + transform.position.x, transform.position.y,
-                    Random.Range(-100, 100) + transform.position.z);
-                if (listenerPrefabs != null)
+                Vector3 position = new Vector3(Random.Range(-spawnDistance, spawnDistance) + transform.position.x, transform.position.y,
+                    Random.Range(-spawnDistance, spawnDistance) + transform.position.z);
+                SpawnListener(position);
+            }
+            return;
+        }
+
+        if (timer > timeBetweenSpawns)
+        {
+            Vector3 position = new Vector3(Random.Range(-spawnDistance, spawnDistance) + transform.position.x, transform.position.y,
+                Random.Range(-spawnDistance, spawnDistance) + transform.position.z);
+            var distance = Vector3.Distance(transform.position, position);
+            float probability;
+            if (distance != 0)
+            {
+                probability = distance / spawnDistance * 100 - 40;
+                if (probability <= 0) probability = 0;
+            }
+            else
+            {
+                probability = 60;
+            }
+
+            if (buildings != null)
+            {
+                GameObject closestBuilding = buildings[0];
+                foreach (var building in buildings)
                 {
-                    if (buildings != null)
+                    if (Vector3.Distance(building.transform.position, position) < 
+                        Vector3.Distance(closestBuilding.transform.position, position))
                     {
-                        GameObject closestBuilding = buildings[0];
-                        foreach (var building in buildings)
+                        closestBuilding = building;
+                    }
+                }
+
+                if (Vector3.Distance(closestBuilding.transform.position, position) < 25.0f)
+                {
+                    probability += 10;
+                }
+            }
+
+            if (Random.Range(0, 100) < probability)
+            {
+                SpawnListener(position);
+            }
+            timer = 0;
+            return;
+        }
+    }
+
+
+    void SpawnListener(Vector3 position)
+    {
+        if (listenerPrefabs != null)
+        {
+            
+            var random = Random.Range(0, 100);
+            var x = 100 / listenerPrefabs.Count * 9 / 10;
+            var y = 100 - listenerPrefabs.Count * x;
+            if (buildings != null)
+            {
+                GameObject closestBuilding = buildings[0];
+                foreach (var building in buildings)
+                {
+                    if (Vector3.Distance(building.transform.position, position) < 
+                        Vector3.Distance(closestBuilding.transform.position, position))
+                    {
+                        closestBuilding = building;
+                    }
+                }
+                
+                if (Vector3.Distance(closestBuilding.transform.position, position) < 25.0f)
+                {
+                    for (int j = 0; j < listenerPrefabs.Count; j++)
+                    {
+                        if (listenerPrefabs[j].GetComponent<PersonLogic>().favGenre == 
+                            closestBuilding.GetComponent<Building>().genre)
                         {
-                            if (Vector3.Distance(building.transform.position, position) < 
-                                Vector3.Distance(closestBuilding.transform.position, position))
+                            var value = x * j + x + y;
+                            if (value < random)
                             {
-                                closestBuilding = building;
+                                Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                return;
                             }
                         }
-                        
-                        if (Vector3.Distance(closestBuilding.transform.position, position) < 25.0f)
+                        else
                         {
-                            var random = Random.Range(0, 100);
-                            var x = 100 / listenerPrefabs.Count * 9 / 10;
-                            for (int j = 0; j < listenerPrefabs.Count; j++)
+                            var value = x * j + x;
+                            if (value < random)
                             {
-                                if (listenerPrefabs[j].GetComponent<PersonLogic>().favGenre)
-                                {
-                                    
-                                }
+                                Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                return;
                             }
                         }
                     }
                 }
+                else
+                {
+                    for (int j = 0; j < listenerPrefabs.Count; j++)
+                    {
+                        var value = x * j + x;
+                        if (value < random)
+                        {
+                            Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                            return;
+                        }
+                    }
+                }
             }
-            return;
         }
     }
 }

@@ -8,9 +8,9 @@ public class PersonLogic : MonoBehaviour
     private int minSatisfaction;
     private int currSatisfaction = 0;
     
-    private Genre favGenre;
-    private Instrument favInstrument;
-    private Pattern favPattern;
+    public Genre favGenre;
+    public Instrument favInstrument;
+    public Pattern favPattern;
     
     private GameObject Player;
     private Genre playerGenre;
