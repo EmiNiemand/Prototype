@@ -21,7 +21,8 @@ public class PersonLogic : MonoBehaviour
 
     private bool isAlreadyPlaying = false;
     
-    public UnityEvent detectedPlayerPlaying;
+    public UnityEvent playerStartedPlaying;
+    public UnityEvent playerStoppedPlaying;
     
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class PersonLogic : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
         
-        detectedPlayerPlaying.AddListener(SetPathToPlayer);
+        playerStartedPlaying.AddListener(SetPathToPlayer);
+        playerStoppedPlaying.AddListener(ReturnToPreviousPath);
     }
 
     // Update is called once per frame
@@ -68,12 +70,13 @@ public class PersonLogic : MonoBehaviour
 
         if (currSatisfaction > minSatisfaction)
         {
-            detectedPlayerPlaying.Invoke();
+            playerStartedPlaying.Invoke();
         }
 
         // else
         // {
         //     isAlreadyPlaying = false;
+        //     playerStoppedPlaying.Invoke();
         // }
         
 
@@ -81,6 +84,11 @@ public class PersonLogic : MonoBehaviour
 
     void SetPathToPlayer()
     {
-        _personMovement.SetNewPathWithPathFindingToPlayer(Player.transform.position);
+        _personMovement.SetNewPathToPlayer(Player.transform.position);
+    }
+    
+    void ReturnToPreviousPath()
+    {
+        _personMovement.ReturnToPreviousPath();
     }
 }

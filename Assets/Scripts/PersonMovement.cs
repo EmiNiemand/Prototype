@@ -5,151 +5,118 @@ using UnityEngine.Events;
 
 public class PersonMovement : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> pathPoints;
-    
-    public UnityEvent<GameObject> startBeingAlarmedEvent;
-    public UnityEvent stopBeingAlarmedEvent;
-    public Dictionary<int, Collider> hitColliders;
-    private RaycastHit[] hits;
-    
-    private Rigidbody rb;
-    
-    public bool isAlarmed = false;
-
-    private int pathPointNumber = 0;
-    private CapsuleCollider bCollider;
-    private GameObject target;
-    
-    [SerializeField] private float timeToStopSearching = 5;
+    [SerializeField] private float timeToStopSearching = 2;
     [SerializeField] private float moveSpeed;
     
-    private float timer = 0;
-
+    private CapsuleCollider bCollider;
+    private Rigidbody rb;
+    private RaycastHit[] hits;
     private List<Vector3> path;
-    private List<Vector3> backPath;
-
-    private Vector3 previousPosition;
+    private Vector3 endTarget;
+    private Vector3 previousTarget;
+    private float timer = 0;
+    private float speedMultiplier = 1.0f;
+    
+    
+    public Dictionary<int, Collider> hitColliders;
+    public bool isAlarmed = false;
 
     // Start is called before the first frame update
     void Start()
     {
         hitColliders = new Dictionary<int, Collider>();
-        backPath = new List<Vector3>();
         path = new List<Vector3>();
         hits = new RaycastHit[50];
-
-        previousPosition = transform.position;
-        
-        if (startBeingAlarmedEvent == null) 
-            startBeingAlarmedEvent = new UnityEvent<GameObject>();
-        
-        startBeingAlarmedEvent.AddListener(StartBeingAlarmed);
-        
-        if (stopBeingAlarmedEvent == null) 
-            stopBeingAlarmedEvent = new UnityEvent();
-        
-        stopBeingAlarmedEvent.AddListener(StopBeingAlarmed);
 
         bCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
 
-        path.Add(new Vector3(pathPoints[pathPointNumber].transform.position.x, 0, 
-            pathPoints[pathPointNumber].transform.position.z));
+        path.Add(GetRandomPoint());
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 pos = transform.position;
+
+        if (path.Count == 0 && !isAlarmed)
+        {
+            path.Add(GetRandomPoint());
+            SetNewPathWithPathFinding();
+        }
+        
         if (isAlarmed)
         {
-            if (timer > timeToStopSearching || path.Count == 0) 
-                stopBeingAlarmedEvent.Invoke();
-            
-            previousPosition = transform.position;
-            timer += Time.deltaTime;
-        }
-        
-        var pos = transform.position;
-
-        if (path.Count == 0) 
-            return;
-        
-        rb.MovePosition(transform.position + (path[0] - new Vector3(transform.position.x, 0, transform.position.z)).normalized * moveSpeed);
-        
-        if (Vector3.Distance(new Vector3(pos.x, 0, pos.z), new Vector3(path[0].x, 0, path[0].z)) < 0.1f)
-        {
-            if (isAlarmed) backPath.Add(new Vector3(path[0].x ,path[0].y, path[0].z));
-            
-            path.RemoveAt(0);
-            
-            if (!isAlarmed && path.Count == 0)
-            {
-                pathPointNumber++;
-                if (pathPointNumber >= pathPoints.Count) pathPointNumber = 0;
-                path.Add(new Vector3(pathPoints[pathPointNumber].transform.position.x, 0, pathPoints[pathPointNumber].transform.position.z));
-            }
-
-            else if (isAlarmed)
-            {
-                if (path == null)
-                {
-                    stopBeingAlarmedEvent.Invoke();
-                }
-            }
-        }
-    }
-    
-    private void StartBeingAlarmed(GameObject targetObject)
-    {
-        hitColliders.Clear();
-        target = targetObject;
-        isAlarmed = true;
-        path.Clear();
-        backPath.Clear();
-        SetNewPathWithPathFinding();
-    }
-    
-    private void StopBeingAlarmed()
-    {
-        hitColliders.Clear();
-        target = null;
-        timer = 0;
-        isAlarmed = false;
-        if (backPath.Count != 0)
-        {
-            path.Clear();
-            backPath.Reverse();
-            path = backPath;
+            speedMultiplier = 1.5f;
         }
         else
         {
-            SetNewPath();
+            speedMultiplier = 1.0f;
+        }
+
+        rb.MovePosition(transform.position + (path[0] - new Vector3(pos.x, 0, pos.z)).normalized 
+            * (moveSpeed * speedMultiplier));
+        
+        if (Vector3.Distance(new Vector3(pos.x, 0, pos.z), new Vector3(path[0].x, 0, path[0].z)) < 0.1f)
+        {
+            if (!isAlarmed)
+            {
+                StartCoroutine(WaitAndGetNewRandomPoint());
+            }
         }
     }
 
-    void SetNewPath()
+    private Vector3 GetRandomPoint()
     {
-        float minDistance;
-        if (backPath.Count == 0) minDistance = Vector3.Distance(transform.position, 
-            new Vector3(pathPoints[0].transform.position.x, 0, pathPoints[0].transform.position.z));
-        else minDistance = Vector3.Distance(backPath[backPath.Count - 1], new Vector3(pathPoints[0].transform.position.x, 
-            0, pathPoints[0].transform.position.z));
+        endTarget = new Vector3(UnityEngine.Random.Range(-500, 500), UnityEngine.Random.Range(-500, 500), 0);
         
-        int i = 0;
-        foreach (var point in pathPoints)
-        {
-            var p = new Vector3(point.transform.position.x, 0, point.transform.position.z);
-            if (Vector3.Distance(transform.position, p) <= minDistance)
-            {
-                target = point;
-                pathPointNumber = i;
-            }
-
-            i++;
-        }
+        // TODO: Dopisac sprawdzanie dla spawnu bo juz mi sie nie chcialo
+        
+        // foreach (var obj in GameObject.FindGameObjectsWithTag("Obstacles"))
+        // {
+        //     var col = obj.GetComponent<BoxCollider>();
+        //     if (col && ((transform.position.y + bCollider.height / 2 > obj.transform.position.y - col.size.y / 2 &&
+        //                  transform.position.y - bCollider.height / 2 < obj.transform.position.y - col.size.y / 2) ||
+        //                 (transform.position.y - bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 && 
+        //                  transform.position.y + bCollider.height / 2 > obj.transform.position.y + col.size.y / 2) ||
+        //                 (transform.position.y + bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 &&
+        //                  transform.position.y - bCollider.height / 2 > obj.transform.position.y - col.size.y / 2)))
+        //     {
+        //         endTarget = new Vector3(UnityEngine.Random.Range(-500, 500), UnityEngine.Random.Range(-500, 500), 0);
+        //     }
+        // }
+        
+        return endTarget;
+    }
+    
+    private IEnumerator WaitAndGetNewRandomPoint()
+    {
+        yield return new WaitForSeconds(1.5f);
+        endTarget = GetRandomPoint();
         SetNewPathWithPathFinding();
     }
     
+    private IEnumerator WaitAndGoToPlayer()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SetNewPathWithPathFinding();
+    }
+
+    public void SetNewPathToPlayer(Vector3 playerPosition)
+    {
+        previousTarget = endTarget;
+        endTarget = playerPosition;
+        isAlarmed = true;
+        StartCoroutine(WaitAndGoToPlayer());
+    }
+        
+    public void ReturnToPreviousPath()
+    {
+        endTarget = previousTarget;
+        isAlarmed = false;
+        SetNewPathWithPathFinding();
+    }
+
     void SetNewPathWithPathFinding()
     {
         path.Clear();
@@ -169,42 +136,12 @@ public class PersonMovement : MonoBehaviour
         }
 
         // Find path using A*
-        path = GetComponent<AI.Pathfinding>().FindPath(transform.position, target.transform.position);
+        path = GetComponent<AI.Pathfinding>().FindPath(transform.position, endTarget);
 
-        if(path.Count == 0) stopBeingAlarmedEvent.Invoke();
-        
         for (int i = 0; i < path.Count - 1; i++)
         {
             Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
         }
     }
     
-    public void SetNewPathWithPathFindingToPlayer(Vector3 playerPosition)
-    {
-        path.Clear();
-
-        foreach (var obj in GameObject.FindGameObjectsWithTag("Obstacles"))
-        {
-            var col = obj.GetComponent<BoxCollider>();
-            if (col && ((transform.position.y + bCollider.height / 2 > obj.transform.position.y - col.size.y / 2 &&
-                         transform.position.y - bCollider.height / 2 < obj.transform.position.y - col.size.y / 2) ||
-                        (transform.position.y - bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 && 
-                         transform.position.y + bCollider.height / 2 > obj.transform.position.y + col.size.y / 2) ||
-                        (transform.position.y + bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 &&
-                         transform.position.y - bCollider.height / 2 > obj.transform.position.y - col.size.y / 2)))
-            {
-                if (!hitColliders.ContainsKey(col.GetInstanceID())) hitColliders.Add(col.GetInstanceID(), col);
-            }
-        }
-
-        // Find path using A*
-        path = GetComponent<AI.Pathfinding>().FindPath(transform.position, playerPosition);
-
-        if(path.Count == 0) stopBeingAlarmedEvent.Invoke();
-        
-        for (int i = 0; i < path.Count - 1; i++)
-        {
-            Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
-        }
-    }
 }
