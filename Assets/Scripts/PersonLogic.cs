@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class PersonLogic : MonoBehaviour
 {
-    private int minSatisfaction;
-    private int currSatisfaction = 0;
+    private float minSatisfaction;
+    private float currSatisfaction = 0;
+    private PersonMovement _personMovement;
     
     public Genre favGenre;
     public Instrument favInstrument;
@@ -16,6 +17,7 @@ public class PersonLogic : MonoBehaviour
     private Genre playerGenre;
     private Instrument playerInstrument;
     private Pattern playerPattern;
+    private float playerSkill;
 
     private bool isAlreadyPlaying = false;
     
@@ -24,7 +26,7 @@ public class PersonLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        minSatisfaction = UnityEngine.Random.Range(0, 25);
+        minSatisfaction = UnityEngine.Random.Range(40, 60);
         favGenre = (Genre)UnityEngine.Random.Range(0, 4);
         favInstrument = (Instrument)UnityEngine.Random.Range(0, 2);
         favPattern = (Pattern)UnityEngine.Random.Range(0, 2);
@@ -37,10 +39,13 @@ public class PersonLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO: Pobierz stan gracza i sprawdz czy aktualnie rozpoczal gre na instrumencie
+        // Jezeli tak, sprawdz czy spelnia warunki
+        //
         // if (Player. cos tam cos tam stan bool istnienia)
-        // Pobrac ostatnie patterny, sprawdzic czy wypadl akurat ten ulubiony
-        // Pobrac instrument na ktorym gra gracz
-        // Pobrac gatunek muzyki
+        // TODO: Pobrac ostatnie patterny, sprawdzic czy wypadl akurat ten ulubiony
+        // TODO: Pobrac instrument na ktorym gra gracz
+        // TODO: Pobrac gatunek muzyki
 
         isAlreadyPlaying = true;
         
@@ -54,18 +59,28 @@ public class PersonLogic : MonoBehaviour
             currSatisfaction += 20;
         }
         
-        if (playerGenre == favGenre)
+        if (playerPattern == favPattern)
         {
             currSatisfaction += 25;
         }
-        // currSatisfaction = 
-        // Pobierz stan gracza i sprawdz czy aktualnie rozpoczal gre na instrumencie
-        // Jezeli tak, sprawdz czy spelnia warunki
-            
+
+        currSatisfaction += playerSkill;
+
+        if (currSatisfaction > minSatisfaction)
+        {
+            detectedPlayerPlaying.Invoke();
+        }
+
+        // else
+        // {
+        //     isAlreadyPlaying = false;
+        // }
+        
+
     }
 
     void SetPathToPlayer()
     {
-        
+        _personMovement.SetNewPathWithPathFindingToPlayer(Player.transform.position);
     }
 }

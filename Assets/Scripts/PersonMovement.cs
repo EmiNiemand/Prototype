@@ -178,4 +178,33 @@ public class PersonMovement : MonoBehaviour
             Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
         }
     }
+    
+    public void SetNewPathWithPathFindingToPlayer(Vector3 playerPosition)
+    {
+        path.Clear();
+
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Obstacles"))
+        {
+            var col = obj.GetComponent<BoxCollider>();
+            if (col && ((transform.position.y + bCollider.height / 2 > obj.transform.position.y - col.size.y / 2 &&
+                         transform.position.y - bCollider.height / 2 < obj.transform.position.y - col.size.y / 2) ||
+                        (transform.position.y - bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 && 
+                         transform.position.y + bCollider.height / 2 > obj.transform.position.y + col.size.y / 2) ||
+                        (transform.position.y + bCollider.height / 2 < obj.transform.position.y + col.size.y / 2 &&
+                         transform.position.y - bCollider.height / 2 > obj.transform.position.y - col.size.y / 2)))
+            {
+                if (!hitColliders.ContainsKey(col.GetInstanceID())) hitColliders.Add(col.GetInstanceID(), col);
+            }
+        }
+
+        // Find path using A*
+        path = GetComponent<AI.Pathfinding>().FindPath(transform.position, playerPosition);
+
+        if(path.Count == 0) stopBeingAlarmedEvent.Invoke();
+        
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            Debug.DrawLine(path[i], path[i+1], Color.red, 2.0f);
+        }
+    }
 }
