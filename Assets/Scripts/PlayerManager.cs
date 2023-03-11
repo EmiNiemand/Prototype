@@ -28,13 +28,11 @@ public class PlayerManager : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        playerMovement.Jump();
+        return;
     }
     private void PollMouse()
     {
-        var delta = Mouse.current.delta.ReadValue() * Time.deltaTime;
-        // Debug.Log(delta);
-        playerMovement.RotateCamera(delta);
+        return;
     }
 
     public void OnShop(InputAction.CallbackContext context)
