@@ -64,7 +64,7 @@ public class PersonMovement : MonoBehaviour
 
     private Vector3 GetRandomPoint()
     {
-        endTarget = new Vector3(UnityEngine.Random.Range(-500, 500), UnityEngine.Random.Range(-500, 500), 0);
+        endTarget = new Vector3(UnityEngine.Random.Range(-100, 100), 0, UnityEngine.Random.Range(-100, 100));
         
         // TODO: Dopisac sprawdzanie dla spawnu bo juz mi sie nie chcialo
         

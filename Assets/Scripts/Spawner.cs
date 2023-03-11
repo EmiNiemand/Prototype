@@ -19,7 +19,13 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < minNumberOfSpawns; i++)
+        {
+            Vector3 position = new Vector3(Random.Range(-spawnDistance, spawnDistance) + transform.position.x, transform.position.y,
+                Random.Range(-spawnDistance, spawnDistance) + transform.position.z);
+            SpawnListener(position);
+            numberOfSpawned++;
+        }
     }
 
     // Update is called once per frame
@@ -27,16 +33,6 @@ public class Spawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         if (numberOfSpawned == maxNumberOfSpawns) return;
-        if (numberOfSpawned < minNumberOfSpawns)
-        {
-            for (int i = 0; i < minNumberOfSpawns - numberOfSpawned; i++)
-            {
-                Vector3 position = new Vector3(Random.Range(-spawnDistance, spawnDistance) + transform.position.x, transform.position.y,
-                    Random.Range(-spawnDistance, spawnDistance) + transform.position.z);
-                SpawnListener(position);
-            }
-            return;
-        }
 
         if (timer > timeBetweenSpawns)
         {
@@ -75,9 +71,9 @@ public class Spawner : MonoBehaviour
             if (Random.Range(0, 100) < probability)
             {
                 SpawnListener(position);
+                numberOfSpawned++;
             }
             timer = 0;
-            return;
         }
     }
 
@@ -90,6 +86,7 @@ public class Spawner : MonoBehaviour
             var random = Random.Range(0, 100);
             var x = 100 / listenerPrefabs.Count * 9 / 10;
             var y = 100 - listenerPrefabs.Count * x;
+            var z = 100 / listenerPrefabs.Count;
             if (buildings != null)
             {
                 GameObject closestBuilding = buildings[0];
@@ -104,24 +101,30 @@ public class Spawner : MonoBehaviour
                 
                 if (Vector3.Distance(closestBuilding.transform.position, position) < 25.0f)
                 {
+                    bool dupa = false;
                     for (int j = 0; j < listenerPrefabs.Count; j++)
                     {
                         if (listenerPrefabs[j].GetComponent<PersonLogic>().favGenre == 
                             closestBuilding.GetComponent<Building>().genre)
                         {
+                            dupa = true;
                             var value = x * j + x + y;
-                            if (value < random)
+                            if (random <= value)
                             {
-                                Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                listener.transform.parent = transform;
                                 return;
                             }
                         }
                         else
                         {
-                            var value = x * j + x;
-                            if (value < random)
+                            float value;
+                            if (!dupa) value = x * j + x;
+                            else value = x * j + x + y;
+                            if (random <= value)
                             {
-                                Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                                listener.transform.parent = transform;
                                 return;
                             }
                         }
@@ -131,10 +134,11 @@ public class Spawner : MonoBehaviour
                 {
                     for (int j = 0; j < listenerPrefabs.Count; j++)
                     {
-                        var value = x * j + x;
-                        if (value < random)
+                        var value = z * j + z;
+                        if (random <= value)
                         {
-                            Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                            var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
+                            listener.transform.parent = transform;
                             return;
                         }
                     }
