@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Music.Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,18 +13,18 @@ namespace Music
         private SessionUI sessionUI;
         
         //TODO: move to player
-        private HashSet<Pattern> knownPatterns;
+        private HashSet<Helpers.Pattern> knownPatterns;
         
-        private List<Sound> recordedSounds;
-        private List<Pattern> potentialPatterns;
+        private List<Helpers.Sound> recordedSounds;
+        private List<Helpers.Pattern> potentialPatterns;
         private float lastTime = 0;
         
         public void Start()
         {
-            knownPatterns = new HashSet<Pattern>();
+            knownPatterns = new HashSet<Helpers.Pattern>();
             
-            recordedSounds = new List<Sound>();
-            potentialPatterns = new List<Pattern>();
+            recordedSounds = new List<Helpers.Sound>();
+            potentialPatterns = new List<Helpers.Pattern>();
             
             instrument = FindObjectOfType<Instrument>();
             instrument.Setup();
@@ -52,7 +51,7 @@ namespace Music
                 recordedSounds.Clear(); potentialPatterns.Clear(); PatternFail();
             }
             
-            recordedSounds.Add(new Sound(instrument.samples[index], rhythmDiff));
+            recordedSounds.Add(new Helpers.Sound(instrument.samples[index], rhythmDiff));
             lastTime = currentTime;
 
             DetectPattern();
@@ -119,7 +118,7 @@ namespace Music
         #endregion
 
         #region Session logic
-        private void PatternSuccess(Pattern pattern, float accuracy)
+        private void PatternSuccess(Helpers.Pattern pattern, float accuracy)
         {
             //TODO: implement needed functions
             // if (player.AddPattern(pattern)) sessionUI.DiscoveredPattern();

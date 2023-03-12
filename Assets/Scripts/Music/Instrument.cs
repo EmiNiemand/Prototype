@@ -20,8 +20,8 @@ namespace Music
     public class Instrument : MonoBehaviour
     {
         public Genre genre;
-        public List<Pattern> patterns;
-        public List<Sample> samples;
+        public List<Helpers.Pattern> patterns;
+        public List<Helpers.Sample> samples;
         public int defaultPatternIndex;
 
         private AudioSource[] sources;

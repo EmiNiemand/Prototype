@@ -61,3 +61,7 @@ crashlytics-build.properties
 .vscode
 UserSettings/
 .idea
+ProjectSettings/BurstAotSettings_StandaloneWindows.json
+ProjectSettings/CommonBurstAotSettings.json
+ProjectSettings/Packages/com.unity.polybrush/Settings.json ProjectSettings/Packages/com.unity.probuilder/Settings.json ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+ProjectSettings/ShaderGraphSettings.asset
