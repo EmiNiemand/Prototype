@@ -161,27 +161,6 @@ public class Enemy : MonoBehaviour
                 if (!hitColliders.ContainsKey(col.GetInstanceID())) hitColliders.Add(col.GetInstanceID(), col);
             }
         }
-        
-        // TODO: to delete if ^ this method works
-        /*for (int i = 0; i < 36; i++)
-        {
-            Vector3 direction = Quaternion.AngleAxis(10f * i, Vector3.up) * Vector3.right;
-            Vector3 position = transform.position;
-            Vector3 origin = new Vector3(position.x, position.y + bCollider.height / 4, position.z);
-            int rayHits = Physics.RaycastNonAlloc(origin, direction, hits, 50f);
-            /*Debug.DrawRay(origin, direction, Color.red, 0.5f);#1#
-            for (int j = 0; j < rayHits; j++)
-            {
-                if (!hitColliders.ContainsKey(hits[j].collider.GetInstanceID()) && hits[j].collider.CompareTag("Obstacles")) hitColliders.Add(hits[j].collider.GetInstanceID(), hits[j].collider);
-            }
-            origin = new Vector3(position.x, position.y - bCollider.height / 4, position.z);
-            rayHits = Physics.RaycastNonAlloc(origin, direction, hits, 50f);
-            /*Debug.DrawRay(origin, direction, Color.red, 0.5f);#1#
-            for (int j = 0; j < rayHits; j++)
-            {
-                if (!hitColliders.ContainsKey(hits[j].collider.GetInstanceID()) && hits[j].collider.CompareTag("Obstacles")) hitColliders.Add(hits[j].collider.GetInstanceID(), hits[j].collider);
-            }
-        }*/
 
         // Find path using A*
         path = GetComponent<AI.Pathfinding>().FindPath(transform.position, target.transform.position);

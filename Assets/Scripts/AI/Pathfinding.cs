@@ -33,8 +33,8 @@ namespace AI
         private List<Collider> colliders;
         private const int STRAIGHT_MOVE_COST = 10;
         private const int DIAGONAL_MOVE_COST = 14;
-        private int cellSize = 1;
-        int2 gridSize = new int2(100, 100);
+        private int cellSize = 2;
+        int2 gridSize = new int2(30, 30);
         
 
         public List<Vector3> FindPath(Vector3 sPosition, Vector3 ePosition)
