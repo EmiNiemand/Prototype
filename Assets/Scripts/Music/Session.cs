@@ -8,20 +8,17 @@ namespace Music
     public class Session : MonoBehaviour
     {
         public Instrument instrument;
-        
         private int bpm;
+        
         private SessionUI sessionUI;
-        
-        //TODO: move to player
-        private HashSet<Helpers.Pattern> knownPatterns;
-        
+        private PlayerManager playerManager;
+
         private List<Helpers.Sound> recordedSounds;
         private List<Helpers.Pattern> potentialPatterns;
         private float lastTime = 0;
         
         public void Start()
         {
-            knownPatterns = new HashSet<Helpers.Pattern>();
             
             recordedSounds = new List<Helpers.Sound>();
             potentialPatterns = new List<Helpers.Pattern>();
@@ -30,6 +27,8 @@ namespace Music
             instrument.Setup();
             
             bpm = (int)instrument.genre;
+            
+            playerManager = FindObjectOfType<PlayerManager>();
             
             sessionUI = FindObjectOfType<SessionUI>();
             sessionUI.Setup(bpm);
@@ -122,9 +121,8 @@ namespace Music
         {
             //TODO: implement needed functions
             // if (player.AddPattern(pattern)) sessionUI.DiscoveredPattern();
-            if(knownPatterns.Add(pattern))
+            if(playerManager.AddPattern(pattern))
                 sessionUI.DiscoveredPattern();
-            Debug.Log(knownPatterns.Count);
             
             sessionUI.UpdateAccuracy(accuracy);
         }

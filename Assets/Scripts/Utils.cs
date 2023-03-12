@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Genre value is its BPM 
 public enum Genre
 {
-    Jazz,
-    Religious,
-    Rock,
-    Rap,
-    RnB,
-    Metal
+    Religious = 60,
+    Jazz = 80,
+    Rap = 90,
+    RnB = 110,
+    Rock = 140,
+    Metal = 180
 }
 
-public enum Instrument
+public enum InstrumentName
 {
     Guitar,
     Drums,

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class PersonMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    
+
     private CapsuleCollider bCollider;
     private Rigidbody rb;
     private List<Vector3> path;
@@ -64,7 +64,7 @@ public class PersonMovement : MonoBehaviour
 
     private Vector3 GetRandomPoint()
     {
-        endTarget = new Vector3(UnityEngine.Random.Range(-100, 100), 0, UnityEngine.Random.Range(-100, 100));
+        endTarget = new Vector3(UnityEngine.Random.Range(-10, 10), 0, UnityEngine.Random.Range(-10, 10));
         
         // TODO: Dopisac sprawdzanie dla spawnu bo juz mi sie nie chcialo
         

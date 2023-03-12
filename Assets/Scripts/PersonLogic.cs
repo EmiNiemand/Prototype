@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class PersonLogic : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class PersonLogic : MonoBehaviour
     private PersonMovement _personMovement;
     
     [HideInInspector] public Genre favGenre;
-    [HideInInspector] public Instrument favInstrument;
+    [HideInInspector] public InstrumentName favInstrumentName;
     [HideInInspector] public Pattern favPattern;
     
     private GameObject Player;
     private Genre playerGenre;
-    private Instrument playerInstrument;
+    private InstrumentName playerInstrumentName;
     private Pattern playerPattern;
     private float playerSkill;
 
@@ -29,7 +30,7 @@ public class PersonLogic : MonoBehaviour
     {
         minSatisfaction = UnityEngine.Random.Range(40, 60);
         favGenre = (Genre)UnityEngine.Random.Range(0, 4);
-        favInstrument = (Instrument)UnityEngine.Random.Range(0, 2);
+        favInstrumentName = (InstrumentName)UnityEngine.Random.Range(0, 2);
         favPattern = (Pattern)UnityEngine.Random.Range(0, 2);
 
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -56,7 +57,7 @@ public class PersonLogic : MonoBehaviour
             currSatisfaction += 30;
         }
         
-        if (playerInstrument == favInstrument)
+        if (playerInstrumentName == favInstrumentName)
         {
             currSatisfaction += 20;
         }

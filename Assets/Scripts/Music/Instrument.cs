@@ -8,15 +8,6 @@ using UnityEngine.Serialization;
 
 namespace Music
 {
-    //Genre value is its BPM 
-    public enum Genre
-    {
-        Default = 60,
-        Jazz = 80,
-        Pop = 120,
-        Rock = 140
-    }
-
     public class Instrument : MonoBehaviour
     {
         public Genre genre;

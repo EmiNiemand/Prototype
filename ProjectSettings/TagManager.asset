@@ -6,10 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Obstacles
-  - PUB
-  - Church
-  - Shop
-  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -17,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Usable
   - 
   - 
   - 
