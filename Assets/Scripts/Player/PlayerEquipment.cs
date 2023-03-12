@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Music;
 using UnityEngine;
 
@@ -9,20 +10,22 @@ public class PlayerEquipment : MonoBehaviour
     public int rep = 100;
 
     private HashSet<Music.Helpers.Pattern> patterns;
-    private HashSet<Instrument> instruments;
+    private List<Instrument> instruments;
 
     // Start is called before the first frame update
     void Start()
     {
         patterns = new HashSet<Music.Helpers.Pattern>();
-        instruments = new HashSet<Instrument>();
+        instruments = new List<Instrument>();
     }
 
     public bool BuyInstrument(int price, Instrument instrument)
     {
         if (price > cash) return false;
-        if (!instruments.Add(instrument)) return false;
         
+        if (instruments.Contains(instrument)) return false;
+        instruments.Add(instrument);
+
         cash -= price;
         return true;
     }
@@ -37,7 +40,7 @@ public class PlayerEquipment : MonoBehaviour
         cash += playerCash; rep += playerRep;
     }
     
-    public HashSet<Instrument> GetInstruments()
+    public List<Instrument> GetInstruments()
     {
         return instruments;
     }

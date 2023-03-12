@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    //TODO: DELET
+    [SerializeField] private Instrument instrument;
+    
     [SerializeField] private GameObject sessionStarter;
     private PlayerMovement playerMovement;
     private PlayerEquipment playerEquipment;
     private PlayerCollider playerCollider;
     
-    private PlayerShop playerShop;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,8 @@ public class PlayerManager : MonoBehaviour
         playerEquipment = GetComponent<PlayerEquipment>();
         playerCollider = GetComponent<PlayerCollider>();
         
-        playerShop = GetComponent<PlayerShop>();
+        //TODO: DELET, mock
+        playerEquipment.BuyInstrument(0, instrument);
     }
     
     #region Equipment methods
@@ -31,10 +34,16 @@ public class PlayerManager : MonoBehaviour
 
     public bool AddPattern(Music.Helpers.Pattern newPattern)
     {
-        return playerEquipment.AddPattern(newPattern);
+        if (playerEquipment.AddPattern(newPattern))
+        {
+            //TODO: when everything's ready, move CrowdManager.NewPattern() here
+            return true;
+        }
+
+        return false;
     }
 
-    public HashSet<Instrument> GetInstruments()
+    public List<Instrument> GetInstruments()
     {
         return playerEquipment.GetInstruments();
     }
@@ -49,13 +58,40 @@ public class PlayerManager : MonoBehaviour
     // Assuming that player can start session anywhere
     public void OnJump(InputAction.CallbackContext context)
     {
-        return;
+        if (!context.started) return;
+        
+        // CrowdManager.OnSessionStart(InstrumentName.Drums, Genre.Jazz);
+
+        Instantiate(sessionStarter, transform)
+            .GetComponent<SessionStarter>()
+            .Setup(this);
     }
     
     public void OnShop(InputAction.CallbackContext context)
     {
         if (!context.started) return;
+        
         playerCollider.OnUse();
+    }
+
+    //TODO: DELET, mock methods
+    public void OnTest1(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        // CrowdManager.OnSessionStart(InstrumentName.Drums, Genre.Jazz);
+        
+    }
+    public void OnTest2(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        // CrowdManager.OnNewPattern(pattern);
+        
+    }
+    public void OnTest3(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        // CrowdManager.OnSessionEnd();
+        
     }
     #endregion
 }

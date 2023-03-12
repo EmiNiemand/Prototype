@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b0761c32222e46be231cc791a8e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 0
+  name: 1
   icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  genre: 80
+  genre: 110
   patterns:
   - {fileID: 11400000, guid: ad54773e1d4484a4abb09673febec566, type: 2}
   samples:
