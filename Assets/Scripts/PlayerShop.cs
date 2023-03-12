@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using Music;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShop : MonoBehaviour, IUsable
 {
-    //public List<Instrument> instruments;
+    public List<Instrument> instruments;
     
     private bool isActive = false;
     private GameObject canvas;
@@ -12,15 +15,14 @@ public class PlayerShop : MonoBehaviour, IUsable
 
     private void Start()
     {
-        canvas = GameObject.Find("Shop");
+        canvas = GameObject.Find("Interactive").transform.GetChild(0).GetChild(0).GameObject();
         canvas.SetActive(false);
         playerManager = FindObjectOfType<PlayerManager>();
     }
     
     public void OnEnter(GameObject player)
     {
-        Debug.Log("Entered shop interaction zone!");
-        //TODO: show interaction indicator
+        ShowShop();
     }
 
     public void OnUse(GameObject player)
@@ -31,24 +33,33 @@ public class PlayerShop : MonoBehaviour, IUsable
 
     public void OnExit(GameObject player)
     {
-        Debug.Log("Left shop interaction zone!");
-        //TODO: hide interaction indicator
+        HideShop();
     }
     
 
-    public void ShowShop()
+    void ShowShop()
     {
-        if (isActive)
+        isActive = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        canvas.SetActive(true);
+    }
+
+    void HideShop()
+    {
+        isActive = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        canvas.SetActive(false);
+    }
+
+    public void BuyInstrument()
+    {
+        if (playerManager.BuyInstrument(100, instruments[0]))
         {
-            isActive = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            canvas.SetActive(false);
+            Debug.Log("Kupione");
         }
         else
         {
-            isActive = true;
-            Cursor.lockState = CursorLockMode.Confined;
-            canvas.SetActive(true);
+            Debug.Log("Nie masz hajsu");
         }
     }
 }
