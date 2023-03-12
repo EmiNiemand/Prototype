@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CameraRotate",
-                    "type": "Value",
-                    "id": "f3a074b0-5969-4797-b119-f63132149ce5",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Shop",
                     "type": "Button",
                     "id": "63b43c21-6881-4df8-8a7e-232072cbe45f",
@@ -111,23 +102,80 @@
                 },
                 {
                     "name": "",
-                    "id": "96ac658c-dba1-4474-8788-32cfb8fb21a9",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard+Mouse",
-                    "action": "CameraRotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1b0b8c47-ee67-4089-9f5a-881ce37cb38d",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard+Mouse",
                     "action": "Shop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Session",
+            "id": "6108bad5-7cff-4c18-910d-bf17cb8aa5eb",
+            "actions": [
+                {
+                    "name": "Sound1",
+                    "type": "Button",
+                    "id": "1ff06a3d-1d18-490f-b354-60c9ac7831a9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound2",
+                    "type": "Button",
+                    "id": "95c4f073-0571-41c4-8658-e255fb6b93e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound3",
+                    "type": "Button",
+                    "id": "0e69ef93-93d6-40b6-b5ea-4b1a7c5d5d49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89e9b67c-7844-40ef-b052-d16640f15d83",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcf08478-4848-4575-91b1-01a13ea98b0d",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "544a4582-c3fe-4160-a54d-df32cadd0117",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
