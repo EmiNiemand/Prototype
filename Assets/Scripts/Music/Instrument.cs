@@ -10,6 +10,8 @@ namespace Music
 {
     public class Instrument : MonoBehaviour
     {
+        public InstrumentName name;
+        public Sprite icon;
         public Genre genre;
         public List<Helpers.Pattern> patterns;
         public List<Helpers.Sample> samples;

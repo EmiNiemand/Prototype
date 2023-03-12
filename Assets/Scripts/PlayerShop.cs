@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerShop : MonoBehaviour, IUsable
 {
+    //public List<Instrument> instruments;
+    
     private bool isActive = false;
     private GameObject canvas;
+    private PlayerManager playerManager;
 
     private void Start()
     {
         canvas = GameObject.Find("Shop");
         canvas.SetActive(false);
+        playerManager = FindObjectOfType<PlayerManager>();
     }
     
     public void OnEnter(GameObject player)

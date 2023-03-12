@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Layers
+{
+    Usable = 6
+}
+
 //Genre value is its BPM 
 public enum Genre
 {
