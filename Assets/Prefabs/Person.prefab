@@ -130,6 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
+  floorMinX: -13
+  floorMaxX: 13
+  floorMinZ: -13
+  floorMaxZ: 13
 --- !u!114 &4756764859622227719
 MonoBehaviour:
   m_ObjectHideFlags: 0

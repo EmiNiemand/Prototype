@@ -27,7 +27,9 @@ public enum InstrumentName
     
 public enum Pattern
 {
-    UDUD, 
+    ADAD,
+    ASWD,
+    WSAD
 }
 
 public class Utils : MonoBehaviour

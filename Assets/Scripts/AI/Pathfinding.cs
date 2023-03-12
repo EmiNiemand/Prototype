@@ -39,7 +39,7 @@ namespace AI
 
         public List<Vector3> FindPath(Vector3 sPosition, Vector3 ePosition)
         {
-            colliders = GetComponent<Enemy>().hitColliders.Values.ToList();
+            colliders = GetComponent<PersonMovement>().hitColliders.Values.ToList();
             
             int2 startPosition = worldToGridPosition(sPosition);
             int2 endPosition = worldToGridPosition(ePosition);
