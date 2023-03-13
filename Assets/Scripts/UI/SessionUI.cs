@@ -13,6 +13,11 @@ public class SessionUI : MonoBehaviour
     private readonly Color[] accuracyColors = { Color.red, Color.cyan, Color.green, Color.yellow };
     private readonly string[] accuracyTexts = { "Poor", "Nice", "Great!", "PERFECT" };
     private readonly float[] accuracyThresholds = { /*0.0f,*/0.5f, 0.8f, 0.95f };
+
+    private bool metronomeSoundEnabled;
+    private bool metronomeVisualEnabled;
+    private Image metronomeImage;
+    private Image metronomeInactiveImage;
     
     private Animator animator;
     private AudioSource audioSource;
@@ -20,6 +25,12 @@ public class SessionUI : MonoBehaviour
 
     public void Setup(int bpm, List<Music.Helpers.Sample> samples)
     {
+        metronomeSoundEnabled = true;
+        metronomeVisualEnabled = true;
+
+        metronomeImage = transform.Find("Metronome").GetComponent<Image>();
+        metronomeInactiveImage = transform.Find("Metronome_inactive").GetComponent<Image>();
+        
         accuracyFeedback = transform.Find("AccuracyFeedback").GetComponent<TextMeshProUGUI>();
         
         animator = GetComponent<Animator>();
@@ -62,9 +73,19 @@ public class SessionUI : MonoBehaviour
         animator.SetTrigger("ShowAccuracy");
     }
     
+    public void ToggleSound() { metronomeSoundEnabled = !metronomeSoundEnabled; }
+
+    public void ToggleVisual()
+    {
+        metronomeVisualEnabled = !metronomeVisualEnabled;
+        metronomeImage.enabled = metronomeVisualEnabled;
+        metronomeInactiveImage.enabled = metronomeVisualEnabled;
+    }
+    
     #region Animation Events
     public void AE_MetronomeTick()
     {
+        if (!metronomeSoundEnabled) return;
         audioSource.Play();
     }
     #endregion
