@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2904,6 +2904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buyClip: {fileID: 8300000, guid: dbf8581977dc02646bde2d323cfe7702, type: 3}
+  cantBuyClip: {fileID: 8300000, guid: 620eaf7cef908d84b812a0f9003776f2, type: 3}
   instruments:
   - {fileID: 165286294130914083, guid: eeddef38f60eec94c9bf093095901075, type: 3}
 --- !u!65 &1171382925

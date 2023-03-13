@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerShop : MonoBehaviour, IUsable
 {
     [SerializeField] private AudioClip buyClip;
+    [SerializeField] private AudioClip cantBuyClip;
     private AudioSource sound;
     public List<Instrument> instruments;
     
@@ -53,12 +54,11 @@ public class PlayerShop : MonoBehaviour, IUsable
         if (playerManager.BuyInstrument(100, instruments[0]))
         {
             sound.PlayOneShot(buyClip, 1.0f);
-            
             Debug.Log("Kupione");
-            //TODO: add some cash sound effect
         }
         else
         {
+            sound.PlayOneShot(cantBuyClip, 1.0f);
             Debug.Log("Nie masz hajsu");
         }
     }
