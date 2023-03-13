@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PersonLogic : MonoBehaviour
 {
@@ -6,7 +7,10 @@ public class PersonLogic : MonoBehaviour
     private float currSatisfaction = 0;
     private PersonMovement _personMovement;
 
-    [HideInInspector] public Genre favGenre;
+    private Image satisfactionIndicator;
+    [SerializeField] private Gradient indicatorGradient;
+
+        [HideInInspector] public Genre favGenre;
     [HideInInspector] public InstrumentName favInstrumentName;
     [HideInInspector] public Music.Helpers.Pattern favPattern;
     
@@ -20,18 +24,23 @@ public class PersonLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        satisfactionIndicator = transform.Find("PersonUI").GetComponentInChildren<Image>();
+        
         _personMovement = GetComponent<PersonMovement>();
         
         minSatisfaction = UnityEngine.Random.Range(30, 50);
+        indicatorGradient.colorKeys[1].time = minSatisfaction;
+        
         // favGenre = (Genre)UnityEngine.Random.Range(0, 5);
-        // favInstrumentName = (InstrumentName)UnityEngine.Random.Range(0, 2);
+        favInstrumentName = (InstrumentName)UnityEngine.Random.Range(0, 2);
         
         Debug.Log("TESTOWE USTAWIENIA DLA NPC");
         favGenre = Genre.Jazz;
-        favInstrumentName = InstrumentName.Drums;
+        // favInstrumentName = InstrumentName.Drums;
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
+        
         if (Player.GetComponent<PlayerManager>().GetSessionStatus())
         {
             playerIsPlaying = true;
@@ -68,9 +77,14 @@ public class PersonLogic : MonoBehaviour
     public void SetPlayerPattern(Music.Helpers.Pattern pat)
     {
         playerPattern = pat;
-        
-        if (playerPattern == favPattern) 
+
+        if (playerPattern == favPattern)
             currSatisfaction += 25;
+        else
+            currSatisfaction -= 5;
+        if (currSatisfaction > 100) currSatisfaction = 100;
+        
+        SetSatisfactionIndicator();
     }
     
     public void SetPlayerStatus()
@@ -87,10 +101,9 @@ public class PersonLogic : MonoBehaviour
 
     public void CalculateSatisfaction()
     {
+        currSatisfaction = 0;
         if (playerIsPlaying)
         {
-            currSatisfaction = 0;
-            
             if (playerGenre == favGenre) 
                 currSatisfaction += 30;
 
@@ -107,6 +120,12 @@ public class PersonLogic : MonoBehaviour
         {
             ReturnToPreviousPath();
         }
+        SetSatisfactionIndicator();
+    }
+
+    private void SetSatisfactionIndicator()
+    {
+        satisfactionIndicator.color = indicatorGradient.Evaluate(currSatisfaction / 100);
     }
 
 }

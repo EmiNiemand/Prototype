@@ -51,7 +51,7 @@ public class CrowdManager : MonoBehaviour
             satisfaction += obj.GetCurrentSatisfaction();
         }
 
-        return satisfaction;
+        return satisfaction/crowd.Length;
     }
 
     public InstrumentName GetCurrentPlayerInstrument()

@@ -58,6 +58,9 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Started session with "+instrument.name+"!");
         GetComponent<PlayerInput>().SwitchCurrentActionMap(ActionMaps.Session.ToString());
 
+        Destroy(sessionStarter.gameObject);
+        sessionStarter = null;
+        
         session = Instantiate(sessionPrefab, transform).GetComponent<Session>();
         session.Setup(this, instrument);
         crowdManager.SessionStarted(instrument.name, instrument.genre);
@@ -89,13 +92,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (!context.started) return;
         if(playerEquipment.GetInstruments().Count == 0) return;
+        if(session) { EndSession(); return; }
         if(sessionStarter)
         {
             Destroy(sessionStarter.gameObject);
             sessionStarter = null;
             return;
         }
-        if(session) { EndSession(); return; }
 
         sessionStarter = Instantiate(sessionStarterPrefab, transform)
             .GetComponent<SessionStarter>();
