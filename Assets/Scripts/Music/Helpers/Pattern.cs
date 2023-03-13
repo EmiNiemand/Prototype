@@ -18,6 +18,7 @@ namespace Music.Helpers
     [CreateAssetMenu(fileName = "Pattern", menuName = "Music/Pattern", order = 1)]
     public class Pattern : ScriptableObject
     {
+        public InstrumentName InstrumentName;
         public List<Sound> sounds;
     }
 }

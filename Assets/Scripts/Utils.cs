@@ -22,9 +22,8 @@ public enum Genre
 
 public enum InstrumentName
 {
-    Guitar,
     Drums,
-    Violin
+    Flute
 }
 
 public class Utils : MonoBehaviour
