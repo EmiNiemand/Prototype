@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using AI;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PersonMovement : MonoBehaviour
 {
@@ -48,15 +46,25 @@ public class PersonMovement : MonoBehaviour
             SetNewRandomPoint();
             SetNewPathWithPathFinding();
             return;
-        }
-
-        rb.MovePosition(transform.position + (path[0] - new Vector3(currPostition.x, 0, currPostition.z)).normalized 
-            * (moveSpeed * speedMultiplier));
+        } 
+        
+        // Jak chcemy by się trzymali od gracz na dany dystans, aczkolwiek wtedy
+        // tłum przypomina małpi gaj (kolizje colliderów)
+        // if (path.Count == 0 && isAlarmed)
+        // {
+        //     SetNewPathWithPathFinding();
+        // }
+        
+        if (path.Count != 0)
+        {
+            rb.MovePosition(transform.position + (path[0] - new Vector3(currPostition.x, 0, currPostition.z)).normalized 
+                * (moveSpeed * speedMultiplier));
             
-        if (Vector3.Distance(new Vector3(currPostition.x, 0, currPostition.z), 
-                new Vector3(path[0].x, 0, path[0].z)) < 0.1f)
-        { 
-            path.RemoveAt(0);
+            if (Vector3.Distance(new Vector3(currPostition.x, 0, currPostition.z), 
+                    new Vector3(path[0].x, 0, path[0].z)) < 0.1f)
+            {
+                path.RemoveAt(0);
+            }
         }
         
     }
@@ -67,10 +75,10 @@ public class PersonMovement : MonoBehaviour
         {
             endTarget = new Vector3(UnityEngine.Random.Range(floorMinX, floorMaxX), 0,
                 UnityEngine.Random.Range(floorMinZ, floorMaxZ));
-        } while (Physics.Raycast(endTarget, transform.TransformDirection(Vector3.forward), 1.0f) ||
-                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.back), 1.0f) ||
-                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.left), 1.0f) ||
-                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.right), 1.0f));
+        } while (Physics.Raycast(endTarget, transform.TransformDirection(Vector3.forward), 1.5f) ||
+                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.back), 1.5f) ||
+                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.left), 1.5f) ||
+                 Physics.Raycast(endTarget, transform.TransformDirection(Vector3.right), 1.5f));
 
     }
 

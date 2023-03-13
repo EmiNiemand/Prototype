@@ -1,20 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Music;
 using UnityEngine;
 
 public class CrowdManager : MonoBehaviour
 {
     private PersonLogic[] crowd;
+    private InstrumentName currPlayerInstrument;
+    private Genre currPlayerGenre;
 
     public void SessionStarted(InstrumentName ins, Genre gen)
     {
+        currPlayerInstrument = ins;
+        currPlayerGenre = gen;
+        
         crowd = FindObjectsOfType<PersonLogic>();
 
         foreach (var obj in crowd)
         {
             obj.SetPlayerInstrumentAndGenre(ins, gen);
+            obj.SetPlayerStatus();
         }
     }
     
@@ -51,6 +53,15 @@ public class CrowdManager : MonoBehaviour
 
         return satisfaction;
     }
+
+    public InstrumentName GetCurrentPlayerInstrument()
+    {
+        return currPlayerInstrument;
+    }
     
-    
+    public Genre GetCurrentPlayerGenre()
+    {
+        return currPlayerGenre;
+    }
+
 }

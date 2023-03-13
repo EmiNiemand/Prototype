@@ -26,13 +26,6 @@ public enum InstrumentName
     Drums,
     Violin
 }
-    
-public enum Pattern
-{
-    ADAD,
-    ASWD,
-    WSAD
-}
 
 public class Utils : MonoBehaviour
 {

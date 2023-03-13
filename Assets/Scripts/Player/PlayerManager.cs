@@ -10,14 +10,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject sessionPrefab;
     private Session session;
     private SessionStarter sessionStarter;
-
+    private bool sessionStatus = false;
+    
     private CrowdManager crowdManager;
     
     private PlayerMovement playerMovement;
     private PlayerEquipment playerEquipment;
     private PlayerCollider playerCollider;
     private PlayerCamera playerCamera;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,17 +54,23 @@ public class PlayerManager : MonoBehaviour
 
     public void StartSession(Instrument instrument)
     {
+        sessionStatus = true;
         Debug.Log("Started session with "+instrument.name+"!");
         GetComponent<PlayerInput>().SwitchCurrentActionMap(ActionMaps.Session.ToString());
-        
-        
+
         session = Instantiate(sessionPrefab, transform).GetComponent<Session>();
         session.Setup(this, instrument);
         crowdManager.SessionStarted(instrument.name, instrument.genre);
     }
+    
+    public bool GetSessionStatus()
+    {
+        return sessionStatus;
+    }
 
     public void EndSession()
     {
+        sessionStatus = false;
         Debug.Log("Finished session!");
         crowdManager.SessionEnded();
         Destroy(session.gameObject);
