@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     private PlayerEquipment playerEquipment;
     private PlayerCollider playerCollider;
     private PlayerCamera playerCamera;
+    private PlayerUI playerUI;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,10 @@ public class PlayerManager : MonoBehaviour
         playerEquipment = GetComponent<PlayerEquipment>();
         playerCollider = GetComponent<PlayerCollider>();
         playerCamera = GetComponent<PlayerCamera>();
+        
+        playerUI = GetComponentInChildren<PlayerUI>();
+        playerUI.Setup();
+        playerUI.UpdateCashAndRep(playerEquipment.cash, playerEquipment.rep);
 
         crowdManager = FindObjectOfType<CrowdManager>();
     }
@@ -34,14 +39,13 @@ public class PlayerManager : MonoBehaviour
 
     public bool BuyInstrument(int price, Instrument instrument)
     {
-        return playerEquipment.BuyInstrument(price, instrument);
-    }
+        if (playerEquipment.BuyInstrument(price, instrument))
+        {
+            playerUI.UpdateCashAndRep(playerEquipment.cash, playerEquipment.rep);
+            return true;
+        }
 
-    public bool AddPattern(Music.Helpers.Pattern newPattern)
-    {
-        crowdManager.PlayedPattern(newPattern);
-        
-        return playerEquipment.AddPattern(newPattern);
+        return false;
     }
 
     public HashSet<Instrument> GetInstruments()
@@ -55,7 +59,6 @@ public class PlayerManager : MonoBehaviour
     public void StartSession(Instrument instrument)
     {
         sessionStatus = true;
-        Debug.Log("Started session with "+instrument.name+"!");
         GetComponent<PlayerInput>().SwitchCurrentActionMap(ActionMaps.Session.ToString());
 
         Destroy(sessionStarter.gameObject);
@@ -66,15 +69,24 @@ public class PlayerManager : MonoBehaviour
         crowdManager.SessionStarted(instrument.name, instrument.genre);
     }
     
-    public bool GetSessionStatus()
+    public bool GetSessionStatus() { return sessionStatus; }
+
+    // Argument pat is null when player failed playing pattern
+    public void PlayedPattern(Music.Helpers.Pattern pat)
     {
-        return sessionStatus;
+        crowdManager.PlayedPattern(pat);
+        
+        if (!pat) return;
+        
+        playerEquipment.AddPattern(pat);
+        playerEquipment.AddReward(crowdManager.GetCrowdSatisfaction()/100);
+        
+        playerUI.UpdateCashAndRep(playerEquipment.cash, playerEquipment.rep);
     }
 
     public void EndSession()
     {
         sessionStatus = false;
-        Debug.Log("Finished session!");
         crowdManager.SessionEnded();
         Destroy(session.gameObject);
         session = null;

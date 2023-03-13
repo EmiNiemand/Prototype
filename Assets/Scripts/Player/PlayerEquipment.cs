@@ -9,6 +9,9 @@ public class PlayerEquipment : MonoBehaviour
     public int cash;
     public int rep = 100;
 
+    [SerializeField] private int maxCashReward = 5;
+    [SerializeField] private int maxRepReward = 10;
+
     private HashSet<Music.Helpers.Pattern> patterns;
     private HashSet<Instrument> instruments;
 
@@ -34,9 +37,10 @@ public class PlayerEquipment : MonoBehaviour
         return patterns.Add(newPattern);
     }
 
-    public void UpdateCashAndRep(int playerCash, int playerRep)
+    public void AddReward(float crowdSatisfaction)
     {
-        cash += playerCash; rep += playerRep;
+        cash += (int)(crowdSatisfaction * maxCashReward);
+        rep += (int)(crowdSatisfaction * maxRepReward);
     }
     
     public HashSet<Instrument> GetInstruments()

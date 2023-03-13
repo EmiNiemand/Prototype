@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 namespace Music
 {
@@ -16,7 +18,7 @@ namespace Music
         private List<Helpers.Sound> recordedSounds;
         private List<Helpers.Pattern> potentialPatterns;
         private float lastTime = 0;
-        
+
         public void Setup(PlayerManager manager, Instrument playerInstrument)
         {
             recordedSounds = new List<Helpers.Sound>();
@@ -33,21 +35,27 @@ namespace Music
             sessionUI.Setup(bpm, instrument.samples);
         }
 
+        private float timeoutCounter = 0.0f;
+        private float timeout = 1.0f;
+        private void FixedUpdate()
+        {
+            timeoutCounter += Time.fixedDeltaTime;
+            
+            if (recordedSounds.Count > 0 && timeoutCounter > timeout)
+                PatternTimeout();
+        }
+
         #region Playing sound & detecting pattern
         public void PlaySample(int index)
         {
-            if (instrument.samples.Count-1 < index) return; 
+            if (instrument.samples.Count-1 < index) return;
             
             sessionUI.PlaySound(index);
             
+            timeoutCounter = 0;
+            
             float currentTime = Time.time;
             float rhythmDiff = GetRhythmValue(currentTime - lastTime);
-            // Reset patterns and sounds if player waited for too long
-            // -------------------------------------------------------
-            if (rhythmDiff > 2)
-            {
-                recordedSounds.Clear(); potentialPatterns.Clear(); PatternFail();
-            }
             
             recordedSounds.Add(new Helpers.Sound(instrument.samples[index], rhythmDiff));
             lastTime = currentTime;
@@ -118,21 +126,32 @@ namespace Music
         #region Session logic
         private void PatternSuccess(Helpers.Pattern pattern, float accuracy)
         {
-            //TODO: implement needed functions
-            // if (player.AddPattern(pattern)) sessionUI.DiscoveredPattern();
-            if(playerManager.AddPattern(pattern))
-                sessionUI.DiscoveredPattern();
+            playerManager.PlayedPattern(pattern);
+            //TODO: play some kind of success sound
+                // sessionUI.DiscoveredPattern();
             
             sessionUI.UpdateAccuracy(accuracy);
+        }
+
+        private void PatternTimeout()
+        {
+            recordedSounds.Clear(); 
+            potentialPatterns.Clear();
+            
+            playerManager.PlayedPattern(null);
+            //TODO: play timeout sound 
         }
 
         private void PatternFail()
         {
             sessionUI.UpdateAccuracy(0);
+            playerManager.PlayedPattern(null);
+            //TODO: play some kind of failure sound (record scratch)
         }
         #endregion
         
         #region Helper methods
+
         private float GetRhythmValue(float currentNoteLength)
         {
             return currentNoteLength * (bpm/60.0f);
