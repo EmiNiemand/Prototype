@@ -10,7 +10,8 @@ using UnityEngine.Serialization;
 /// </summary>
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float lerpSpeed;
     
     private new Rigidbody rigidbody;
 
@@ -24,15 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //TODO: improve this
-        rigidbody.MovePosition(rigidbody.position + 
-                               rigidbody.rotation * 
-                               new Vector3(moveVector.x, 0, moveVector.y) * 
-                               Time.deltaTime);
+        rigidbody.MovePosition(Vector3.Lerp(rigidbody.position, 
+            rigidbody.position + rigidbody.rotation * new Vector3(moveVector.x, 0, moveVector.y), lerpSpeed));
     }
 
     public void Move(Vector2 newMoveVector)
     {
-        moveVector = newMoveVector * speed;
+        moveVector = newMoveVector * moveSpeed;
     }
 }

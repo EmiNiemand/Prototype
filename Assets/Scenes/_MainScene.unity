@@ -1534,7 +1534,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28636
+  m_Name: pb_Mesh31102
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4987,9 +4987,21 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 4939108094931768501, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4939108094931768503, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
       propertyPath: speed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939108094931768503, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
+      propertyPath: lerpSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939108094931768503, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
+      propertyPath: moveSpeed
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4939108094931768649, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
       propertyPath: m_RootOrder
