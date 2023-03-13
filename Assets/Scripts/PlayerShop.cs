@@ -6,6 +6,8 @@ using TMPro;
 
 public class PlayerShop : MonoBehaviour, IUsable
 {
+    [SerializeField] private AudioClip buyClip;
+    private AudioSource sound;
     public List<Instrument> instruments;
     
     private bool isActive = false;
@@ -27,6 +29,8 @@ public class PlayerShop : MonoBehaviour, IUsable
         indicatorText.text = string.Empty;
         
         playerManager = FindObjectOfType<PlayerManager>();
+
+        sound = GetComponent<AudioSource>();
     }
     
     public void OnEnter(GameObject player) { indicatorText.text = indicatorString; }
@@ -48,6 +52,8 @@ public class PlayerShop : MonoBehaviour, IUsable
     {
         if (playerManager.BuyInstrument(100, instruments[0]))
         {
+            sound.PlayOneShot(buyClip, 1.0f);
+            
             Debug.Log("Kupione");
             //TODO: add some cash sound effect
         }
