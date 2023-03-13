@@ -7,6 +7,8 @@ public enum Layers
     Usable = 6
 }
 
+public enum ActionMaps { Normal, Session }
+
 //Genre value is its BPM 
 public enum Genre
 {

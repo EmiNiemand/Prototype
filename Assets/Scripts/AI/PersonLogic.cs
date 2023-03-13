@@ -13,18 +13,15 @@ public class PersonLogic : MonoBehaviour
     
     [HideInInspector] public Genre favGenre;
     [HideInInspector] public InstrumentName favInstrumentName;
-    [HideInInspector] public Pattern favPattern;
+    [HideInInspector] public Music.Helpers.Pattern favPattern;
     
     private GameObject Player;
     private Genre playerGenre;
-    private Instrument playerInstrument;
-    private Pattern playerPattern;
+    private InstrumentName playerInstrumentName;
+    private Music.Helpers.Pattern playerPattern;
     private float playerSkill;
     private bool playerIsPlaying = false;
     private bool playerIsAlreadyPlaying = false;
-
-    private UnityEvent playerStartedPlaying;
-    private UnityEvent playerStoppedPlaying;
     
     // Start is called before the first frame update
     void Start()
@@ -34,21 +31,8 @@ public class PersonLogic : MonoBehaviour
         minSatisfaction = UnityEngine.Random.Range(40, 60);
         favGenre = (Genre)UnityEngine.Random.Range(0, 5);
         favInstrumentName = (InstrumentName)UnityEngine.Random.Range(0, 2);
-        favPattern = (Pattern)UnityEngine.Random.Range(0, 2);
 
         Player = GameObject.FindGameObjectWithTag("Player");
-
-        playerStartedPlaying = new UnityEvent();
-        playerStartedPlaying.AddListener(SetPathToPlayer);
-        
-        playerStoppedPlaying = new UnityEvent();
-        playerStoppedPlaying.AddListener(ReturnToPreviousPath);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     
     private void SetPathToPlayer()
@@ -63,13 +47,13 @@ public class PersonLogic : MonoBehaviour
         _personMovement.ReturnToPreviousPath();
     }
 
-    public void SetPlayerInstrumentAndGenre(Instrument ins, Genre gen)
+    public void SetPlayerInstrumentAndGenre(InstrumentName ins, Genre gen)
     {
-        playerInstrument = ins;
+        playerInstrumentName = ins;
         playerGenre = gen;
     }
     
-    public void SetPlayerPattern(Pattern pat)
+    public void SetPlayerPattern(Music.Helpers.Pattern pat)
     {
         playerPattern = pat;
     }
@@ -86,35 +70,26 @@ public class PersonLogic : MonoBehaviour
                 
                 currSatisfaction = 0;
             
-                if (playerGenre == favGenre)
-                {
+                if (playerGenre == favGenre) 
                     currSatisfaction += 30;
-                }
-        
-                if (playerInstrument.name == favInstrumentName)
-                {
+
+                if (playerInstrumentName == favInstrumentName) 
                     currSatisfaction += 20;
-                }
-        
-                if (playerPattern == favPattern)
-                {
+
+                if (playerPattern == favPattern) 
                     currSatisfaction += 25;
-                }
-        
+
+                //TODO: implement somehow
                 // currSatisfaction += playerSkill;
         
                 if (currSatisfaction > minSatisfaction)
-                {
-                    playerStartedPlaying.Invoke();
-                }
-                
+                    SetPathToPlayer();
             }
-
         }
         else
         {
             playerIsAlreadyPlaying = false;
-            playerStoppedPlaying.Invoke();
+            ReturnToPreviousPath();
         }
         
     }

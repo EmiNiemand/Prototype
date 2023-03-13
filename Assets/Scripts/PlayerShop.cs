@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Music;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerShop : MonoBehaviour, IUsable
 {
@@ -11,44 +10,38 @@ public class PlayerShop : MonoBehaviour, IUsable
     
     private bool isActive = false;
     private GameObject canvas;
+    //stupid workaround because disabling GameObject hogs performance
+    private TextMeshProUGUI indicatorText;
+    private string indicatorString;
+    
     private PlayerManager playerManager;
 
     private void Start()
     {
-        canvas = GameObject.Find("Interactive").transform.GetChild(0).GetChild(0).GameObject();
+        indicatorString = "[E] Buy instrument";
+        
+        canvas = transform.Find("Shop").gameObject;
         canvas.SetActive(false);
+
+        indicatorText = transform.Find("Indicator").GetComponentInChildren<TextMeshProUGUI>();
+        indicatorText.text = string.Empty;
+        
         playerManager = FindObjectOfType<PlayerManager>();
     }
     
-    public void OnEnter(GameObject player)
-    {
-        ShowShop();
-    }
+    public void OnEnter(GameObject player) { indicatorText.text = indicatorString; }
 
-    public void OnUse(GameObject player)
-    {
-        //TODO: hide interaction indicator
-        //TODO: show (toggle?) shop interface
-    }
+    public void OnUse(GameObject player) { ToggleShop(); }
 
     public void OnExit(GameObject player)
     {
-        HideShop();
-    }
-    
-
-    void ShowShop()
-    {
-        isActive = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        canvas.SetActive(true);
+        indicatorText.text = string.Empty;
+        if(isActive) ToggleShop();
     }
 
-    void HideShop()
-    {
-        isActive = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        canvas.SetActive(false);
+    public void ToggleShop() {
+        isActive = !isActive;
+        canvas.SetActive(isActive);
     }
 
     public void BuyInstrument()
@@ -56,6 +49,7 @@ public class PlayerShop : MonoBehaviour, IUsable
         if (playerManager.BuyInstrument(100, instruments[0]))
         {
             Debug.Log("Kupione");
+            //TODO: add some cash sound effect
         }
         else
         {

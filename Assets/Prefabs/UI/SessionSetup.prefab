@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genreButton: {fileID: 3008053280844433979, guid: b56dfff9e6b02f848bd6325ce5dd1a3c, type: 3}
+  instrumentButton: {fileID: 3008053280844433979, guid: febf98e83703cc44ba46f031f8cdf980, type: 3}
 --- !u!1 &5251535256407832948
 GameObject:
   m_ObjectHideFlags: 0

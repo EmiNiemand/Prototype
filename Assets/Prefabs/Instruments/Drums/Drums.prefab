@@ -47,13 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b0761c32222e46be231cc791a8e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 0
+  name: 1
   icon: {fileID: 21300000, guid: 72c5999cc9fc5274da13af81bf48eb2e, type: 3}
   genre: 80
   patterns:
   - {fileID: 11400000, guid: ad54773e1d4484a4abb09673febec566, type: 2}
+  - {fileID: 11400000, guid: a53472af89b74e446b0dce9abf9691cf, type: 2}
+  - {fileID: 11400000, guid: 8e1b2d55ed1a5714a87f1a6888be0725, type: 2}
+  - {fileID: 11400000, guid: 578779d86a2831a478b84325828bacde, type: 2}
   samples:
-  - {fileID: 11400000, guid: fa0d1941f41404348921f5f0bf6c1320, type: 2}
+  - {fileID: 11400000, guid: 9ca51f20814a0a44ab3ab43da4313159, type: 2}
   - {fileID: 11400000, guid: 8f216eddab746124597369b3a101ee12, type: 2}
   - {fileID: 11400000, guid: 5948a93987032d24995827046fcd8192, type: 2}
   defaultPatternIndex: 0
@@ -99,7 +102,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fdfc56b4ad493c84d9c9f1e589eadacf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -145,7 +148,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -227,7 +230,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2b5d799d3e949d34a8e94f01c323b689, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -273,7 +276,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -355,7 +358,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 26d114252dde84a4795d64c1a3c77051, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -401,7 +404,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -6,23 +6,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    //TODO: DELET
-    [SerializeField] private Instrument instrument;
+    [SerializeField] private GameObject sessionStarterPrefab;
+    [SerializeField] private GameObject sessionPrefab;
+    private Session session;
+    private SessionStarter sessionStarter;
+
+    private CrowdManager crowdManager;
     
-    [SerializeField] private GameObject sessionStarter;
     private PlayerMovement playerMovement;
     private PlayerEquipment playerEquipment;
     private PlayerCollider playerCollider;
-    
+    private PlayerCamera playerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerEquipment = GetComponent<PlayerEquipment>();
         playerCollider = GetComponent<PlayerCollider>();
-        
-        //TODO: DELET, mock
-        playerEquipment.BuyInstrument(0, instrument);
+        playerCamera = GetComponent<PlayerCamera>();
+
+        crowdManager = FindObjectOfType<CrowdManager>();
     }
     
     #region Equipment methods
@@ -34,64 +38,104 @@ public class PlayerManager : MonoBehaviour
 
     public bool AddPattern(Music.Helpers.Pattern newPattern)
     {
-        if (playerEquipment.AddPattern(newPattern))
-        {
-            //TODO: when everything's ready, move CrowdManager.NewPattern() here
-            return true;
-        }
-
-        return false;
+        crowdManager.PlayedPattern(newPattern);
+        
+        return playerEquipment.AddPattern(newPattern);
     }
 
-    public List<Instrument> GetInstruments()
+    public HashSet<Instrument> GetInstruments()
     {
         return playerEquipment.GetInstruments();
     }
     #endregion
 
-    #region Input methods
+    #region Session Methods
+
+    public void StartSession(Instrument instrument)
+    {
+        Debug.Log("Started session with "+instrument.name+"!");
+        GetComponent<PlayerInput>().SwitchCurrentActionMap(ActionMaps.Session.ToString());
+        
+        
+        session = Instantiate(sessionPrefab, transform).GetComponent<Session>();
+        session.Setup(this, instrument);
+        crowdManager.SessionStarted(instrument.name, instrument.genre);
+    }
+
+    public void EndSession()
+    {
+        Debug.Log("Finished session!");
+        crowdManager.SessionEnded();
+        Destroy(session.gameObject);
+        session = null;
+        GetComponent<PlayerInput>().SwitchCurrentActionMap(ActionMaps.Normal.ToString());
+    }
+    #endregion
+
+    #region Input Methods [NORMAL]
     public void OnMove(InputAction.CallbackContext context)
     {
         playerMovement.Move(context.ReadValue<Vector2>());
     }
-
-    // Assuming that player can start session anywhere
-    public void OnJump(InputAction.CallbackContext context)
+    
+    public void OnToggleSession(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        
-        // CrowdManager.OnSessionStart(InstrumentName.Drums, Genre.Jazz);
+        if(playerEquipment.GetInstruments().Count == 0) return;
+        if(sessionStarter)
+        {
+            Destroy(sessionStarter.gameObject);
+            sessionStarter = null;
+            return;
+        }
+        if(session) { EndSession(); return; }
 
-        Instantiate(sessionStarter, transform)
-            .GetComponent<SessionStarter>()
-            .Setup(this);
+        sessionStarter = Instantiate(sessionStarterPrefab, transform)
+            .GetComponent<SessionStarter>();
+        sessionStarter.Setup(this);
     }
     
-    public void OnShop(InputAction.CallbackContext context)
+    public void OnUse(InputAction.CallbackContext context)
     {
         if (!context.started) return;
         
         playerCollider.OnUse();
     }
-
-    //TODO: DELET, mock methods
-    public void OnTest1(InputAction.CallbackContext context)
+    #endregion
+    
+    #region Input Methods [SESSION]
+    
+    //TODO: dis stupid, improve somehow?
+    public void OnSound1(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        // CrowdManager.OnSessionStart(InstrumentName.Drums, Genre.Jazz);
+        if (!session) return;
         
+        session.PlaySample(0);
     }
-    public void OnTest2(InputAction.CallbackContext context)
+        
+    public void OnSound2(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        // CrowdManager.OnNewPattern(pattern);
+        if (!session) return;
         
+        session.PlaySample(1);
     }
-    public void OnTest3(InputAction.CallbackContext context)
+        
+    public void OnSound3(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        // CrowdManager.OnSessionEnd();
+        if (!session) return;
         
+        session.PlaySample(2);
+    }
+        
+    public void OnSound4(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (!session) return;
+        
+        session.PlaySample(3);
     }
     #endregion
 }

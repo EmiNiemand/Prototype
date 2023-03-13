@@ -21,19 +21,11 @@ namespace Music
 
         public void Setup()
         {
-            sources = GetComponentsInChildren<AudioSource>();
-            for (int i = 0; i < samples.Count; i++)
-            {
-                sources[i].clip = samples[i].clip;
-            }
-        }
-
-        public bool PlaySample(int index)
-        {
-            if (sources.Length <= index) return false;
-            
-            sources[index].Play();
-            return true;
+            // sources = GetComponentsInChildren<AudioSource>();
+            // for (int i = 0; i < samples.Count; i++)
+            // {
+            //     sources[i].clip = samples[i].clip;
+            // }
         }
     }
 }

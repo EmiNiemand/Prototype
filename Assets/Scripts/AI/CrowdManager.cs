@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Music;
@@ -7,7 +8,7 @@ public class CrowdManager : MonoBehaviour
 {
     private PersonLogic[] crowd;
 
-    public void AlertCrowd(Instrument ins, Genre gen)
+    public void SessionStarted(InstrumentName ins, Genre gen)
     {
         crowd = FindObjectsOfType<PersonLogic>();
 
@@ -17,7 +18,7 @@ public class CrowdManager : MonoBehaviour
         }
     }
     
-    public void AlertCrowd(Pattern pat)
+    public void PlayedPattern(Music.Helpers.Pattern pat)
     {
         crowd = FindObjectsOfType<PersonLogic>();
 
@@ -27,7 +28,7 @@ public class CrowdManager : MonoBehaviour
         }
     }
     
-    public void AlertCrowd()
+    public void SessionEnded()
     {
         crowd = FindObjectsOfType<PersonLogic>();
 

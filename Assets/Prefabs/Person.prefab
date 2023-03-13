@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1093756277280724571}
   - component: {fileID: 6029949212717844377}
   - component: {fileID: 4756764859622227719}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Person
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,4 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   favGenre: 0
   favInstrumentName: 0
-  favPattern: 0
+  favPattern: {fileID: 0}

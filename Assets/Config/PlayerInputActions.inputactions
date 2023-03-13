@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "ToggleSession",
                     "type": "Button",
                     "id": "7cb210af-77fe-423a-b453-4842b9dacd71",
                     "expectedControlType": "Button",
@@ -24,36 +24,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shop",
+                    "name": "Use",
                     "type": "Button",
                     "id": "63b43c21-6881-4df8-8a7e-232072cbe45f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Test1",
-                    "type": "Button",
-                    "id": "afeae447-4ec5-4943-bfe9-633e7621f060",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Test2",
-                    "type": "Button",
-                    "id": "60bca435-2be0-4898-aadd-d0992354ad24",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Test3",
-                    "type": "Button",
-                    "id": "f560049a-6197-4aff-a01f-89c4fd20d4a6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -68,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard+Mouse",
-                    "action": "Jump",
+                    "action": "ToggleSession",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -134,40 +107,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard+Mouse",
-                    "action": "Shop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "13e09583-2d07-481e-9964-8b8d28016764",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard+Mouse",
-                    "action": "Test1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "747b8fa9-74b3-491f-8c42-d5c9860c8dc9",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard+Mouse",
-                    "action": "Test2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "82efdd7f-b9ef-4f46-917f-12048b582b48",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard+Mouse",
-                    "action": "Test3",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -199,6 +139,15 @@
                     "name": "Sound3",
                     "type": "Button",
                     "id": "0e69ef93-93d6-40b6-b5ea-4b1a7c5d5d49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "End",
+                    "type": "Button",
+                    "id": "3513bf07-3f42-4d53-862f-501940f8f82c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -236,6 +185,17 @@
                     "processors": "",
                     "groups": "Keyboard+Mouse",
                     "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d78a290-d0ca-4d25-8d19-3e39075110d6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "End",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

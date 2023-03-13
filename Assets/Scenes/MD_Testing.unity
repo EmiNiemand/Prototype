@@ -465,7 +465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 202193212}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: OnJump
+        m_MethodName: OnToggleSession
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

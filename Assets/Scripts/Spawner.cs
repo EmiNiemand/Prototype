@@ -5,16 +5,18 @@ using UnityEngine.SocialPlatforms;
 
 public class Spawner : MonoBehaviour
 {
+    //TODO: This probably should be a Dictionary<InstrumentName, Pattern> but for now it doesn't matter that much 
+    [SerializeField] private List<Music.Helpers.Pattern> patterns;
+    
     [SerializeField] private List<GameObject> buildings;
     [SerializeField] private List<GameObject> listenerPrefabs;
-    [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private float spawnDistance;
-    [SerializeField] private float minNumberOfSpawns;
-    [SerializeField] private float maxNumberOfSpawns;
+    [SerializeField] private int minNumberOfSpawns;
+    [SerializeField] private int maxNumberOfSpawns;
     [SerializeField] private float timeBetweenSpawns;
 
     private float timer = 0;
-    private float numberOfSpawned = 0;
+    private int numberOfSpawned = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -82,7 +84,6 @@ public class Spawner : MonoBehaviour
     {
         if (listenerPrefabs != null)
         {
-            
             var random = Random.Range(0, 100);
             var x = 100 / listenerPrefabs.Count * 9 / 10;
             var y = 100 - listenerPrefabs.Count * x;
@@ -113,6 +114,8 @@ public class Spawner : MonoBehaviour
                             {
                                 var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                                 listener.transform.parent = transform;
+                                // Custom code, while spawner itself seems to be rather generalized(?)
+                                listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                                 return;
                             }
                         }
@@ -125,6 +128,8 @@ public class Spawner : MonoBehaviour
                             {
                                 var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                                 listener.transform.parent = transform;
+                                // Custom code, while spawner itself seems to be rather generalized(?)
+                                listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                                 return;
                             }
                         }
@@ -139,6 +144,8 @@ public class Spawner : MonoBehaviour
                         {
                             var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                             listener.transform.parent = transform;
+                            // Custom code, while spawner itself seems to be rather generalized(?)
+                            listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                             return;
                         }
                     }

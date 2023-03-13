@@ -17,27 +17,26 @@ namespace Music
         private List<Helpers.Pattern> potentialPatterns;
         private float lastTime = 0;
         
-        public void Start()
+        public void Setup(PlayerManager manager, Instrument playerInstrument)
         {
-            
             recordedSounds = new List<Helpers.Sound>();
             potentialPatterns = new List<Helpers.Pattern>();
             
-            instrument = FindObjectOfType<Instrument>();
+            instrument = playerInstrument;
             instrument.Setup();
             
             bpm = (int)instrument.genre;
             
-            playerManager = FindObjectOfType<PlayerManager>();
+            playerManager = manager;
             
             sessionUI = FindObjectOfType<SessionUI>();
-            sessionUI.Setup(bpm);
+            sessionUI.Setup(bpm, instrument.samples);
         }
 
         #region Playing sound & detecting pattern
         public void PlaySample(int index)
         {
-            if (!instrument.PlaySample(index)) return; 
+            if (instrument.samples.Count-1 < index) return; 
             
             sessionUI.PlaySound(index);
             
@@ -137,33 +136,6 @@ namespace Music
         private float GetRhythmValue(float currentNoteLength)
         {
             return currentNoteLength * (bpm/60.0f);
-        }
-        #endregion
-        
-        #region Inputs
-        //TODO: dis stupid, improve somehow?
-        public void OnSound1(InputAction.CallbackContext context)
-        {
-            if (!context.started) return;
-            PlaySample(0);
-        }
-        
-        public void OnSound2(InputAction.CallbackContext context)
-        {
-            if (!context.started) return;
-            PlaySample(1);
-        }
-        
-        public void OnSound3(InputAction.CallbackContext context)
-        {
-            if (!context.started) return;
-            PlaySample(2);
-        }
-        
-        public void OnSound4(InputAction.CallbackContext context)
-        {
-            if (!context.started) return;
-            PlaySample(3);
         }
         #endregion
     }

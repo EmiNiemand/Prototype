@@ -10,21 +10,20 @@ public class PlayerEquipment : MonoBehaviour
     public int rep = 100;
 
     private HashSet<Music.Helpers.Pattern> patterns;
-    private List<Instrument> instruments;
+    private HashSet<Instrument> instruments;
 
     // Start is called before the first frame update
     void Start()
     {
         patterns = new HashSet<Music.Helpers.Pattern>();
-        instruments = new List<Instrument>();
+        instruments = new HashSet<Instrument>();
     }
 
     public bool BuyInstrument(int price, Instrument instrument)
     {
         if (price > cash) return false;
         
-        if (instruments.Contains(instrument)) return false;
-        instruments.Add(instrument);
+        if (!instruments.Add(instrument)) return false;
 
         cash -= price;
         return true;
@@ -40,7 +39,7 @@ public class PlayerEquipment : MonoBehaviour
         cash += playerCash; rep += playerRep;
     }
     
-    public List<Instrument> GetInstruments()
+    public HashSet<Instrument> GetInstruments()
     {
         return instruments;
     }
