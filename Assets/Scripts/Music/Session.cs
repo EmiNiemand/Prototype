@@ -124,6 +124,12 @@ namespace Music
         #endregion
 
         #region Session logic
+
+        public void ToggleCheatSheet()
+        {
+            sessionUI.ToggleCheatSheet();
+        }
+        
         private void PatternSuccess(Helpers.Pattern pattern, float accuracy)
         {
             playerManager.PlayedPattern(pattern);

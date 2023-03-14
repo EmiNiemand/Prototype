@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Music;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -123,9 +124,23 @@ public class PlayerManager : MonoBehaviour
         
         playerCollider.OnUse();
     }
+
+    public void OnResetLevel(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+
+        SceneManager.LoadScene(0);
+    }
     #endregion
     
     #region Input Methods [SESSION]
+
+    public void OnCheatSheet(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        if (!session) return;
+        session.ToggleCheatSheet();
+    }
     
     //TODO: dis stupid, improve somehow?
     public void OnSound1(InputAction.CallbackContext context)

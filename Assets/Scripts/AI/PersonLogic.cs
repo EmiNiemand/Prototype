@@ -82,7 +82,7 @@ public class PersonLogic : MonoBehaviour
             currSatisfaction += 25;
         else
             currSatisfaction -= 5;
-        if (currSatisfaction > 100) currSatisfaction = 100;
+        currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
         
         SetSatisfactionIndicator();
     }

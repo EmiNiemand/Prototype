@@ -18,6 +18,11 @@ public class SessionUI : MonoBehaviour
     private bool metronomeVisualEnabled;
     private Image metronomeImage;
     private Image metronomeInactiveImage;
+
+    [SerializeField] private AudioSource sheetSource;
+    [SerializeField] private AudioClip sheetClipEquip;
+    [SerializeField] private AudioClip sheetClipUnequip;
+    private int sheetAnimScale = -1;
     
     private Animator animator;
     private AudioSource audioSource;
@@ -53,16 +58,25 @@ public class SessionUI : MonoBehaviour
         sampleSources[index].Play();
     }
 
-    public void DiscoveredPattern()
+    public void ToggleCheatSheet()
     {
-        animator.SetTrigger("DiscoveredPattern");
+        if (sheetAnimScale < 0)
+        {
+            sheetSource.clip = sheetClipEquip;
+        }
+        else
+        {
+            sheetSource.clip = sheetClipUnequip;
+        }
+        sheetSource.Play();
+        sheetAnimScale = -sheetAnimScale;
+        animator.SetFloat("CheatSheet", sheetAnimScale);
     }
 
     // Fraction values: <0, 1>
     public void UpdateAccuracy(float fraction)
     {
         ShowAccuracyFeedback(fraction);
-        return;
     }
     
     private void ShowAccuracyFeedback(float fraction)
