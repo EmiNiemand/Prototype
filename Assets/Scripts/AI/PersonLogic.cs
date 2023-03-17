@@ -86,7 +86,7 @@ public class PersonLogic : MonoBehaviour
             currSatisfaction -= 5;
         }
         
-        currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
+        // currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
 
         CheckSatisfaction();
         
@@ -142,7 +142,6 @@ public class PersonLogic : MonoBehaviour
         }
         else
         {
-            playerIsPlaying = false;
             ReturnToPreviousPath();
         }
         
