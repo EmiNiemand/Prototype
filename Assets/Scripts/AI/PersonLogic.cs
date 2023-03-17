@@ -21,6 +21,7 @@ public class PersonLogic : MonoBehaviour
     private Music.Helpers.Pattern playerPattern;
     private float playerSkill;
     private bool playerIsPlaying = false;
+    private bool onPathToPlayer = false;
     
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,7 @@ public class PersonLogic : MonoBehaviour
     {
         Vector3 newPos = new Vector3(Player.transform.position.x - UnityEngine.Random.Range(0.5f, 2.0f), 0, 
             Player.transform.position.z - UnityEngine.Random.Range(0.5f, 2.0f));
+        
         _personMovement.SetNewPathToPlayer(newPos);
     }
     
@@ -79,16 +81,33 @@ public class PersonLogic : MonoBehaviour
 
         if (playerPattern == favPattern)
         {
-            currSatisfaction += 25;
+            currSatisfaction += 15;
+            
+            if (currSatisfaction > 100)
+            {
+                currSatisfaction = 100;
+            }
         }
         else
         {
             currSatisfaction -= 5;
+            
+            if (currSatisfaction < 0)
+            {
+                currSatisfaction = 0;
+            }
         }
-        
-        // currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
 
-        CheckSatisfaction();
+        if (currSatisfaction > minSatisfaction && !onPathToPlayer) 
+        {
+            onPathToPlayer = true;
+            SetPathToPlayer();
+        }
+        else if (currSatisfaction < minSatisfaction && onPathToPlayer)
+        {
+            onPathToPlayer = false;
+            ReturnToPreviousPath();
+        }
         
         SetSatisfactionIndicator();
     }
@@ -121,30 +140,18 @@ public class PersonLogic : MonoBehaviour
                 currSatisfaction += 20;
             }
 
-            //TODO: implement somehow
-            // currSatisfaction += playerSkill;
+            if (currSatisfaction > minSatisfaction)
+            {
+                onPathToPlayer = true;
+                SetPathToPlayer();
+            }
+        }
+        else
+        {
+            onPathToPlayer = false;
+            ReturnToPreviousPath();
+        }
 
-            CheckSatisfaction();
-        }
-        else
-        {
-            ReturnToPreviousPath();
-        }
-        
-        SetSatisfactionIndicator();
-    }
-    
-    public void CheckSatisfaction()
-    {
-        if (currSatisfaction > minSatisfaction) 
-        {
-            SetPathToPlayer();
-        }
-        else
-        {
-            ReturnToPreviousPath();
-        }
-        
         SetSatisfactionIndicator();
     }
 
