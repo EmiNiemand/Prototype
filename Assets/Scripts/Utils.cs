@@ -12,12 +12,8 @@ public enum ActionMaps { Normal, Session }
 //Genre value is its BPM 
 public enum Genre
 {
-    Religious = 60,
     Jazz = 80,
-    Rap = 90,
     RnB = 110,
-    Rock = 140,
-    Metal = 180
 }
 
 public enum InstrumentName

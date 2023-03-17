@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class PersonLogic : MonoBehaviour
     private Image satisfactionIndicator;
     [SerializeField] private Gradient indicatorGradient;
 
-        [HideInInspector] public Genre favGenre;
+    [HideInInspector] public Genre favGenre;
     [HideInInspector] public InstrumentName favInstrumentName;
     [HideInInspector] public Music.Helpers.Pattern favPattern;
     
@@ -30,17 +31,15 @@ public class PersonLogic : MonoBehaviour
         
         minSatisfaction = UnityEngine.Random.Range(30, 50);
         indicatorGradient.colorKeys[1].time = minSatisfaction;
+
+        Array enums = typeof(Genre).GetEnumValues();
+        favGenre = (Genre)enums.GetValue(UnityEngine.Random.Range(0, enums.Length));
         
-        // favGenre = (Genre)UnityEngine.Random.Range(0, 5);
-        favInstrumentName = (InstrumentName)UnityEngine.Random.Range(0, 2);
-        
-        Debug.Log("TESTOWE USTAWIENIA DLA NPC");
-        favGenre = Genre.Jazz;
-        // favInstrumentName = InstrumentName.Drums;
+        enums = typeof(InstrumentName).GetEnumValues();
+        favInstrumentName = (InstrumentName)enums.GetValue(UnityEngine.Random.Range(0, enums.Length));
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        
         if (Player.GetComponent<PlayerManager>().GetSessionStatus())
         {
             playerIsPlaying = true;
@@ -79,10 +78,17 @@ public class PersonLogic : MonoBehaviour
         playerPattern = pat;
 
         if (playerPattern == favPattern)
+        {
             currSatisfaction += 25;
+        }
         else
+        {
             currSatisfaction -= 5;
+        }
+        
         currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
+
+        CheckSatisfaction();
         
         SetSatisfactionIndicator();
     }
@@ -102,24 +108,44 @@ public class PersonLogic : MonoBehaviour
     public void CalculateSatisfaction()
     {
         currSatisfaction = 0;
+        
         if (playerIsPlaying)
         {
-            if (playerGenre == favGenre) 
+            if (playerGenre == favGenre)
+            {
                 currSatisfaction += 30;
+            }
 
             if (playerInstrumentName == favInstrumentName) 
+            {
                 currSatisfaction += 20;
+            }
 
             //TODO: implement somehow
             // currSatisfaction += playerSkill;
-        
-            if (currSatisfaction > minSatisfaction)
-                SetPathToPlayer();
+
+            CheckSatisfaction();
         }
         else
         {
             ReturnToPreviousPath();
         }
+        
+        SetSatisfactionIndicator();
+    }
+    
+    public void CheckSatisfaction()
+    {
+        if (currSatisfaction > minSatisfaction) 
+        {
+            SetPathToPlayer();
+        }
+        else
+        {
+            playerIsPlaying = false;
+            ReturnToPreviousPath();
+        }
+        
         SetSatisfactionIndicator();
     }
 
