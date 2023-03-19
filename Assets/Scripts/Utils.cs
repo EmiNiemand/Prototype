@@ -14,12 +14,14 @@ public enum Genre
 {
     Jazz = 80,
     RnB = 110,
+    Rhythmic = 60
 }
 
 public enum InstrumentName
 {
     Drums,
-    Flute
+    Flute,
+    Clap
 }
 
 public class Utils : MonoBehaviour
