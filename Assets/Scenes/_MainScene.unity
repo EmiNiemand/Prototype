@@ -889,7 +889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478722158}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -991,6 +991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 513341384}
   - component: {fileID: 513341385}
+  - component: {fileID: 513341386}
   m_Layer: 0
   m_Name: CineMachine
   m_TagString: Untagged
@@ -1006,7 +1007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513341383}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1052,6 +1053,20 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1851665432}
+--- !u!114 &513341386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513341383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1123352486}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Position: -13
+  m_Axis: 88
 --- !u!1 &521747647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1552,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50546
+  m_Name: pb_Mesh32420
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2715,6 +2730,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!115 &1123352486
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: LockCameraAxis
+  m_Namespace: 
 --- !u!1001 &1154053224
 PrefabInstance:
   m_ObjectHideFlags: 0
