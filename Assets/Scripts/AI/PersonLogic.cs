@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,9 @@ public class PersonLogic : MonoBehaviour
 
     private Image satisfactionIndicator;
     [SerializeField] private Gradient indicatorGradient;
-
-    [HideInInspector] public Genre favGenre;
-    [HideInInspector] public InstrumentName favInstrumentName;
+    [SerializeField] public List<InstrumentName> favInstrumentsNames;
+    [SerializeField] public List<Genre> favGenres;
+    
     [HideInInspector] public Music.Helpers.Pattern favPattern;
     
     private GameObject Player;
@@ -32,12 +33,6 @@ public class PersonLogic : MonoBehaviour
         
         minSatisfaction = UnityEngine.Random.Range(30, 50);
         indicatorGradient.colorKeys[1].time = minSatisfaction;
-
-        Array enums = typeof(Genre).GetEnumValues();
-        favGenre = (Genre)enums.GetValue(UnityEngine.Random.Range(0, enums.Length));
-        
-        enums = typeof(InstrumentName).GetEnumValues();
-        favInstrumentName = (InstrumentName)enums.GetValue(UnityEngine.Random.Range(0, enums.Length));
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
@@ -130,12 +125,12 @@ public class PersonLogic : MonoBehaviour
         
         if (playerIsPlaying)
         {
-            if (playerGenre == favGenre)
+            if (favGenres.Contains(playerGenre))
             {
                 currSatisfaction += 30;
             }
 
-            if (playerInstrumentName == favInstrumentName) 
+            if (favInstrumentsNames.Contains(playerInstrumentName))
             {
                 currSatisfaction += 20;
             }

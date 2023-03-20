@@ -105,8 +105,7 @@ public class Spawner : MonoBehaviour
                     bool dupa = false;
                     for (int j = 0; j < listenerPrefabs.Count; j++)
                     {
-                        if (listenerPrefabs[j].GetComponent<PersonLogic>().favGenre == 
-                            closestBuilding.GetComponent<Building>().genre)
+                        if (listenerPrefabs[j].GetComponent<PersonLogic>().favGenres.Contains(closestBuilding.GetComponent<Building>().genre))
                         {
                             dupa = true;
                             var value = x * j + x + y;

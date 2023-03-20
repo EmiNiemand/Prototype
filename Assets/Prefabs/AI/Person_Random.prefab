@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6029949212717844377}
   - component: {fileID: 4756764859622227719}
   m_Layer: 7
-  m_Name: Person
+  m_Name: Person_Random
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74d56cdf0ca35a94480b40c0bf90cd0a, type: 2}
+  - {fileID: 2100000, guid: 286344a06c063d249bceb406bec771b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -353,6 +353,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  favGenre: 0
-  favInstrumentName: 0
+  favInstrumentsNames: 000000000100000002000000
+  favGenres: 500000006e0000003c000000
   favPattern: {fileID: 0}
