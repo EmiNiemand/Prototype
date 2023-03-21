@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private GameObject sessionStarterPrefab;
     [SerializeField] private GameObject sessionPrefab;
+    [SerializeField] private Instrument firstInstrument;
+    
     private Session session;
     private SessionStarter sessionStarter;
     private bool sessionStatus = false;
@@ -34,6 +36,7 @@ public class PlayerManager : MonoBehaviour
         playerUI.UpdateCashAndRep(playerEquipment.cash, playerEquipment.rep);
 
         crowdManager = FindObjectOfType<CrowdManager>();
+        BuyInstrument(0, firstInstrument);
     }
     
     #region Equipment methods

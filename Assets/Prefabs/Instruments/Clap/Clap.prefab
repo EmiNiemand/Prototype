@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 2
   icon: {fileID: 21300000, guid: 4c2a56efd721ea14993d7b517aae9870, type: 3}
-  genre: 60
+  genre: 80
   patterns:
   - {fileID: 11400000, guid: 2bf6c7c140709ac43a136a06768cbf3b, type: 2}
   samples:

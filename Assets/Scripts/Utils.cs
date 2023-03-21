@@ -13,8 +13,7 @@ public enum ActionMaps { Normal, Session }
 public enum Genre
 {
     Jazz = 80,
-    RnB = 110,
-    Rhythmic = 60
+    RnB = 110
 }
 
 public enum InstrumentName
