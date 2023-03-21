@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -443,7 +443,6 @@ MonoBehaviour:
   - {fileID: 3731040834299144638, guid: 623901949ae1513469e4b894cd1cb585, type: 3}
   - {fileID: 3731040834299144638, guid: 72e19f2d1c897e44ba0b6580ae6e1f26, type: 3}
   - {fileID: 3731040834299144638, guid: 55b7fce23cd72f94ca5337cc90043591, type: 3}
-  - {fileID: 3731040834299144638, guid: ef35271b92628434ea41deef10b1238e, type: 3}
   spawnDistance: 10
   minNumberOfSpawns: 10
   maxNumberOfSpawns: 25
@@ -889,7 +888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478722158}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1007,7 +1006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513341383}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1062,7 +1061,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 513341383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1123352486}
+  m_Script: {fileID: 1325563459}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Position: -13
@@ -2730,20 +2729,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!115 &1123352486
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 5
-  m_Script: 
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_ExecutionOrder: 0
-  m_ClassName: LockCameraAxis
-  m_Namespace: 
 --- !u!1001 &1154053224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3190,6 +3175,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.8202105, y: 5.0355234, z: 3.689696}
   m_Center: {x: -0.00000011920929, y: 2.5177617, z: 0.0000011920929}
+--- !u!115 &1325563459
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: LockCameraAxis
+  m_Namespace: 
 --- !u!1 &1373572894
 GameObject:
   m_ObjectHideFlags: 0

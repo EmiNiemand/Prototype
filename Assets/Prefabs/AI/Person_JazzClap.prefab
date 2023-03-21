@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6029949212717844377}
   - component: {fileID: 4756764859622227719}
   m_Layer: 7
-  m_Name: Person_RhytmicClap
+  m_Name: Person_JazzClap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,5 +354,5 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   favInstrumentsNames: 02000000
-  favGenres: 3c000000
+  favGenres: 50000000
   favPattern: {fileID: 0}
