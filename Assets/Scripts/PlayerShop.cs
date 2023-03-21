@@ -54,10 +54,12 @@ public class PlayerShop : MonoBehaviour, IUsable
         if (playerManager.BuyInstrument(100, instruments[0]))
         {
             sound.PlayOneShot(buyClip, 1.0f);
+            Debug.Log("Kupione");
         }
         else
         {
             sound.PlayOneShot(cantBuyClip, 1.0f);
+            Debug.Log("Nie masz hajsu");
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -889,7 +889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478722158}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1007,7 +1007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513341383}
   m_LocalRotation: {x: 0.368936, y: 0.6032299, z: -0.368936, w: 0.6032299}
-  m_LocalPosition: {x: -20.196815, y: 38.3, z: 0.6940088}
+  m_LocalPosition: {x: -23.2, y: 38.3, z: 0.6940088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2939,7 +2939,6 @@ MonoBehaviour:
   cantBuyClip: {fileID: 8300000, guid: 620eaf7cef908d84b812a0f9003776f2, type: 3}
   instruments:
   - {fileID: 165286294130914083, guid: eeddef38f60eec94c9bf093095901075, type: 3}
-  - {fileID: 165286294130914083, guid: eeddef38f60eec94c9bf093095901075, type: 3}
 --- !u!65 &1171382925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3891,7 +3890,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1171382924}
         m_TargetAssemblyTypeName: PlayerShop, Assembly-CSharp
-        m_MethodName: BuyInstrument
+        m_MethodName: BuyInstrument1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5126,6 +5125,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4939108094931768500, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
+      propertyPath: firstInstrument
+      value: 
+      objectReference: {fileID: 1614627464109228098, guid: ea1cb43718ed29145a6c55430b47243f, type: 3}
     - target: {fileID: 4939108094931768501, guid: 1ad23076dbb835748b942f5d2f0892a3, type: 3}
       propertyPath: m_Mass
       value: 70

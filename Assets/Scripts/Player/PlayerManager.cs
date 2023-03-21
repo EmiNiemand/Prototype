@@ -10,7 +10,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject sessionStarterPrefab;
     [SerializeField] private GameObject sessionPrefab;
     [SerializeField] private Instrument firstInstrument;
-    
     private Session session;
     private SessionStarter sessionStarter;
     private bool sessionStatus = false;
