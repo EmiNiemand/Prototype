@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerEquipment = GetComponent<PlayerEquipment>();
+        playerEquipment.Setup(firstInstrument);
         playerCollider = GetComponent<PlayerCollider>();
         playerCamera = GetComponent<PlayerCamera>();
         
@@ -35,7 +36,6 @@ public class PlayerManager : MonoBehaviour
         playerUI.UpdateCashAndRep(playerEquipment.cash, playerEquipment.rep);
 
         crowdManager = FindObjectOfType<CrowdManager>();
-        BuyInstrument(0, firstInstrument);
     }
     
     #region Equipment methods

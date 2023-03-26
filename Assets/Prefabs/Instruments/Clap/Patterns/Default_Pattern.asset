@@ -17,6 +17,6 @@ MonoBehaviour:
   - sample: {fileID: 11400000, guid: a21cec6fcadec1949a63469e974097df, type: 2}
     delay: 0
   - sample: {fileID: 11400000, guid: a21cec6fcadec1949a63469e974097df, type: 2}
-    delay: 0
+    delay: 0.5
   - sample: {fileID: 11400000, guid: 823f53d995e39a54ba52f715630d0bd7, type: 2}
-    delay: 0
+    delay: 0.5

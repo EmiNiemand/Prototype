@@ -16,10 +16,11 @@ public class PlayerEquipment : MonoBehaviour
     private HashSet<Instrument> instruments;
 
     // Start is called before the first frame update
-    void Start()
+    public void Setup(Instrument firstInstrument)
     {
         patterns = new HashSet<Music.Helpers.Pattern>();
         instruments = new HashSet<Instrument>();
+        BuyInstrument(0, firstInstrument);
     }
 
     public bool BuyInstrument(int price, Instrument instrument)

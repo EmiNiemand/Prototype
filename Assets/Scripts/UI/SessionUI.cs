@@ -33,8 +33,8 @@ public class SessionUI : MonoBehaviour
         metronomeSoundEnabled = true;
         metronomeVisualEnabled = true;
 
-        metronomeImage = transform.Find("Metronome").GetComponent<Image>();
-        metronomeInactiveImage = transform.Find("Metronome_inactive").GetComponent<Image>();
+        metronomeImage = transform.Find("PulseColor").GetComponent<Image>();
+        metronomeInactiveImage = transform.Find("Pulse").GetComponent<Image>();
         
         accuracyFeedback = transform.Find("AccuracyFeedback").GetComponent<TextMeshProUGUI>();
         
