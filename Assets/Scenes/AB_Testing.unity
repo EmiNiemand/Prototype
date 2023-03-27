@@ -436,7 +436,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a53472af89b74e446b0dce9abf9691cf, type: 2}
   - {fileID: 11400000, guid: 8e1b2d55ed1a5714a87f1a6888be0725, type: 2}
   - {fileID: 11400000, guid: 578779d86a2831a478b84325828bacde, type: 2}
-  - {fileID: 11400000, guid: 2bf6c7c140709ac43a136a06768cbf3b, type: 2}
   buildings:
   - {fileID: 794716023}
   - {fileID: 919979800}

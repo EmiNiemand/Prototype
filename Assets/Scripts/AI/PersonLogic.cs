@@ -13,9 +13,8 @@ public class PersonLogic : MonoBehaviour
     [SerializeField] private Gradient indicatorGradient;
     [SerializeField] public List<InstrumentName> favInstrumentsNames;
     [SerializeField] public List<Genre> favGenres;
-    
-    [HideInInspector] public Music.Helpers.Pattern favPattern;
-    
+    [SerializeField] public List<Music.Helpers.Pattern> favPatterns;
+
     private GameObject Player;
     private InstrumentName playerInstrumentName;
     private Genre playerGenre;
@@ -74,7 +73,7 @@ public class PersonLogic : MonoBehaviour
     {
         playerPattern = pat;
 
-        if (playerPattern == favPattern)
+        if (favPatterns.Contains(playerPattern))
         {
             currSatisfaction += 15;
             

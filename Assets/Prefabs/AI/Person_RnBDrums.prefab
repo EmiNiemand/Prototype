@@ -355,4 +355,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   favInstrumentsNames: 00000000
   favGenres: 6e000000
-  favPattern: {fileID: 0}
+  favPatterns:
+  - {fileID: 11400000, guid: ad54773e1d4484a4abb09673febec566, type: 2}
+  - {fileID: 11400000, guid: a53472af89b74e446b0dce9abf9691cf, type: 2}
+  - {fileID: 11400000, guid: 8e1b2d55ed1a5714a87f1a6888be0725, type: 2}
+  - {fileID: 11400000, guid: 578779d86a2831a478b84325828bacde, type: 2}

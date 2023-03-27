@@ -79,7 +79,6 @@ public class Spawner : MonoBehaviour
         }
     }
 
-
     void SpawnListener(Vector3 position)
     {
         if (listenerPrefabs != null)
@@ -114,7 +113,6 @@ public class Spawner : MonoBehaviour
                                 var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                                 listener.transform.parent = transform;
                                 // Custom code, while spawner itself seems to be rather generalized(?)
-                                listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                                 return;
                             }
                         }
@@ -128,7 +126,6 @@ public class Spawner : MonoBehaviour
                                 var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                                 listener.transform.parent = transform;
                                 // Custom code, while spawner itself seems to be rather generalized(?)
-                                listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                                 return;
                             }
                         }
@@ -144,7 +141,6 @@ public class Spawner : MonoBehaviour
                             var listener = Instantiate(listenerPrefabs[j], position, Quaternion.identity);
                             listener.transform.parent = transform;
                             // Custom code, while spawner itself seems to be rather generalized(?)
-                            listener.GetComponent<PersonLogic>().favPattern = patterns[Random.Range(0, patterns.Count - 1)];
                             return;
                         }
                     }

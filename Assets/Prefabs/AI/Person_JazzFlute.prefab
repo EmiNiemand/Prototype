@@ -355,4 +355,4 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   favInstrumentsNames: 01000000
   favGenres: 50000000
-  favPattern: {fileID: 0}
+  favPatterns: []

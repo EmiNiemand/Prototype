@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7b5d7f8a9313f94c8ea0718da393024, type: 3}
-  m_Name: Default_Pattern
+  m_Name: ClapPattern1
   m_EditorClassIdentifier: 
-  InstrumentName: 0
+  InstrumentName: 2
   sounds:
   - sample: {fileID: 11400000, guid: a21cec6fcadec1949a63469e974097df, type: 2}
     delay: 0
