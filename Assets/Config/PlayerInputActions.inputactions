@@ -1,0 +1,602 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Normal",
+            "id": "43377a5f-38d7-4ddf-a0d1-dd77dc7c1d17",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "419c2964-2db4-4c60-a440-2a6456fa7b88",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleSession",
+                    "type": "Button",
+                    "id": "7cb210af-77fe-423a-b453-4842b9dacd71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "63b43c21-6881-4df8-8a7e-232072cbe45f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ResetLevel",
+                    "type": "Button",
+                    "id": "556e1c9b-bba6-4564-8c21-73a1af852e77",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "85cb68b6-1fff-45ca-845b-99f333cb220d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "ToggleSession",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "2736316d-7ebb-48f5-967e-09bacec90a8e",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2667b19c-9a70-4fd2-beac-2b03edb76d80",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "3eaa86e1-08cf-4ea2-a695-062cac28a908",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "3447413b-52b4-4776-809c-d67dcbe2d197",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f9cd0e73-dac7-4164-a4c7-0371c636fea5",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1b0b8c47-ee67-4089-9f5a-881ce37cb38d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "5464a6ab-dcb9-40c4-b972-6bdf58c38767",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetLevel",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "c8fd4399-ccaf-4abd-84dd-bdca83052d4b",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "2e6d39b9-895d-4caf-be17-52c7e1cec1b1",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Session",
+            "id": "6108bad5-7cff-4c18-910d-bf17cb8aa5eb",
+            "actions": [
+                {
+                    "name": "Sound1",
+                    "type": "Button",
+                    "id": "1ff06a3d-1d18-490f-b354-60c9ac7831a9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound2",
+                    "type": "Button",
+                    "id": "95c4f073-0571-41c4-8658-e255fb6b93e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sound3",
+                    "type": "Button",
+                    "id": "0e69ef93-93d6-40b6-b5ea-4b1a7c5d5d49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "End",
+                    "type": "Button",
+                    "id": "3513bf07-3f42-4d53-862f-501940f8f82c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheatSheet",
+                    "type": "Button",
+                    "id": "74f76f26-7110-442c-9823-48ab151957c6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ResetLevel",
+                    "type": "Button",
+                    "id": "f4cdd3fe-cae0-49e6-bae8-71223189ec0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89e9b67c-7844-40ef-b052-d16640f15d83",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea86abce-eee3-471b-90eb-7d054a55b40c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e63e795-b30c-4ec5-b66a-accafe9c5a52",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "492d3cfd-52b1-4f5f-aeae-a7e5bd2d7cd5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb733285-0085-4858-855c-5269ad75fe21",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "669435c6-ed4a-419e-88ef-450b42fcf334",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40d313c4-1008-4465-9c6e-031f3fd393c1",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9ec1b3a-cef0-4b56-bd3b-eda5ff78ff84",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b87a995-d99e-48ca-bec0-f15614bcd8f2",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dcf08478-4848-4575-91b1-01a13ea98b0d",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4981e994-f4d7-4283-9565-1fe92c20f118",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc234c22-8dea-4c8c-a3f5-83ecb2053f74",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0ee05bd-5d54-480d-ad8f-6269033dbeb6",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b4e5bca-cd58-417d-9785-805ac845a977",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ec41dce-5fbb-48d2-8d2f-a6203b7154f2",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f46d5b8-548e-4c43-a82c-4d4a6b76a4c5",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62442308-88eb-4a72-a6c9-d87d8dde4aa9",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f5eeda3-d46e-4859-a926-3acb377e146b",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "544a4582-c3fe-4160-a54d-df32cadd0117",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f07e2096-d53c-4e10-90b0-2ebfa6f9ed4b",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c5922e6-7e95-4590-84a8-082488e4a0f5",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e60971a3-c6f2-4387-a791-914685445400",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a26cc6c-bf93-44ea-8357-fe693bc1053f",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "068fdaba-77be-4cf0-8c21-feb88495ef85",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a40ad77-f0cd-4cf6-9699-471bc673efc5",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c4855d2-da4b-40d6-a422-dd6f51ac7051",
+                    "path": "<Keyboard>/comma",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a09eba4c-55c7-4564-a951-b88bf975b4e7",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "Sound3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d78a290-d0ca-4d25-8d19-3e39075110d6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "End",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e8865f9-c9e7-4724-b1d6-0315f2291389",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "CheatSheet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "078c0b99-7cdd-49ee-ba32-4f0c41a87505",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetLevel",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "f9f5d307-0d36-47c6-9cef-2cfbcb6ece01",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "64e935bb-506a-41fa-983a-171aa82e30ce",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard+Mouse",
+                    "action": "ResetLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard+Mouse",
+            "bindingGroup": "Keyboard+Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
