@@ -55,6 +55,36 @@ public class PlayerShop : MonoBehaviour, IUsable
         {
             sound.PlayOneShot(buyClip, 1.0f);
             Debug.Log("Kupione");
+            Destroy(transform.GetChild(0).GetChild(0).Find("Drums").gameObject);
+        }
+        else
+        {
+            sound.PlayOneShot(cantBuyClip, 1.0f);
+            Debug.Log("Nie masz hajsu");
+        }
+    }
+    
+    public void BuyInstrument2()
+    {
+        if (playerManager.BuyInstrument(100, instruments[1]))
+        {
+            sound.PlayOneShot(buyClip, 1.0f);
+            Debug.Log("Kupione");
+            Destroy(transform.GetChild(0).GetChild(0).Find("Trumpet").gameObject);
+        }
+        else
+        {
+            sound.PlayOneShot(cantBuyClip, 1.0f);
+            Debug.Log("Nie masz hajsu");
+        }
+    }
+
+    public void BuyInstrument3()
+    {
+        if (playerManager.BuyInstrument(10000, instruments[1]))
+        {
+            sound.PlayOneShot(buyClip, 1.0f);
+            Debug.Log("Kupione");
         }
         else
         {

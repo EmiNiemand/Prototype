@@ -74,23 +74,11 @@ public class PersonLogic : MonoBehaviour
         playerPattern = pat;
 
         if (favPatterns.Contains(playerPattern))
-        {
             currSatisfaction += 15;
-            
-            if (currSatisfaction > 100)
-            {
-                currSatisfaction = 100;
-            }
-        }
         else
-        {
             currSatisfaction -= 5;
-            
-            if (currSatisfaction < 0)
-            {
-                currSatisfaction = 0;
-            }
-        }
+        
+        currSatisfaction = Mathf.Clamp(currSatisfaction, 0, 100);
 
         if (currSatisfaction > minSatisfaction && !onPathToPlayer) 
         {

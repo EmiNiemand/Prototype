@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6029949212717844377}
   - component: {fileID: 4756764859622227719}
   m_Layer: 7
-  m_Name: Person_JazzFlute
+  m_Name: Person_JazzTrumpet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,6 +353,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  favInstrumentsNames: 01000000
+  favInstrumentsNames: 02000000
   favGenres: 50000000
-  favPatterns: []
+  favPatterns:
+  - {fileID: 11400000, guid: 44e2da033a7685b4191fb5f8b0883797, type: 2}

@@ -5,6 +5,7 @@ using Music;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class SessionStarter : MonoBehaviour
 {
@@ -13,66 +14,36 @@ public class SessionStarter : MonoBehaviour
 
     private PlayerManager playerManager;
     private List<GameObject> createdButtons;
-    private Dictionary<Genre, List<Instrument>> instrumentsByGenre;
     
     public void Setup(PlayerManager manager)
     {
         playerManager = manager;
         createdButtons = new List<GameObject>();
-        instrumentsByGenre = new Dictionary<Genre, List<Instrument>>();
         
         var instruments = manager.GetInstruments();
         var offset = 0;
-        var genres = new HashSet<Genre>();
         foreach (var instrument in instruments)
         {
-            if(genres.Add(instrument.genre)) 
-                AddGenreButton(instrument.genre);
-            
-            if(!instrumentsByGenre.ContainsKey(instrument.genre)) 
-                instrumentsByGenre.Add(instrument.genre, new List<Instrument>());
-            instrumentsByGenre[instrument.genre].Add(instrument);
+            AddInstrumentButton(instrument, instruments.Count);
         }
-    }
-
-    private void AddGenreButton(Genre genre)
-    {
-        var xPos = 300 * createdButtons.Count * 
-                   (createdButtons.Count % 2 == 0 ? -1 : 1);
-        
-        createdButtons.Add(Instantiate(genreButton, transform));
-        createdButtons[^1].transform.Translate(xPos, 0, 0);
-        createdButtons[^1].GetComponent<Button>()
-            .onClick.AddListener(()=> ChooseGenre(genre));
-        createdButtons[^1].GetComponentInChildren<TextMeshProUGUI>()
-            .text = genre.ToString();
-    }
-
-    private void ChooseGenre(Genre genre)
-    {
-        createdButtons.ForEach(Destroy);
-        createdButtons.Clear();
-        
-        ShowInstrumentButtons(genre);
-    }
-
-    private void ShowInstrumentButtons(Genre genre)
-    {
-        instrumentsByGenre[genre].ForEach(AddInstrumentButton);
+        createdButtons[0].GetComponent<Button>().Select();
     }
     
-    private void AddInstrumentButton(Instrument instrument)
+    private void AddInstrumentButton(Instrument instrument, int count)
     {
-        var xPos = 300 * createdButtons.Count * 
-                   (createdButtons.Count % 2 == 0 ? -1 : 1);
+        var buttonOffset = 300;
+        var xPosBegin = (-count / 2) * buttonOffset + (buttonOffset/2) * ((count+1)%2);
+        var xPos = xPosBegin + buttonOffset * createdButtons.Count;
         
         createdButtons.Add(Instantiate(instrumentButton, transform));
         createdButtons[^1].transform.Translate(xPos, 0, 0);
-        createdButtons[^1].GetComponent<Image>().sprite = instrument.icon;
-        createdButtons[^1].GetComponent<Button>()
-            .onClick.AddListener(()=> ChooseInstrument(instrument));
-        createdButtons[^1].GetComponentInChildren<TextMeshProUGUI>()
-            .text = instrument.name.ToString();
+        var button = createdButtons[^1].GetComponent<Button>();
+        button.onClick.AddListener(()=> ChooseInstrument(instrument));
+        button.transform.Find("Icon").GetComponent<Image>().sprite = instrument.icon;
+        button.transform.Find("Name").GetComponent<TextMeshProUGUI>().
+            text = instrument.name.ToString();
+        button.transform.Find("Genre").GetComponent<TextMeshProUGUI>().
+            text = "Genre: "+instrument.genre+" ("+(int)instrument.genre+")";
     }
 
     private void ChooseInstrument(Instrument instrument)

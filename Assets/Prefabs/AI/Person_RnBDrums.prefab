@@ -353,7 +353,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  favInstrumentsNames: 00000000
+  favInstrumentsNames: 01000000
   favGenres: 6e000000
   favPatterns:
   - {fileID: 11400000, guid: ad54773e1d4484a4abb09673febec566, type: 2}

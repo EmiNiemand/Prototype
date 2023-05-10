@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b5d7f8a9313f94c8ea0718da393024, type: 3}
   m_Name: DrumsPattern4
   m_EditorClassIdentifier: 
+  InstrumentName: 1
   sounds:
   - sample: {fileID: 11400000, guid: 8f216eddab746124597369b3a101ee12, type: 2}
     delay: 0

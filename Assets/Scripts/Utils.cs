@@ -18,9 +18,9 @@ public enum Genre
 
 public enum InstrumentName
 {
+    Clap,
     Drums,
-    Flute,
-    Clap
+    Trumpet
 }
 
 public class Utils : MonoBehaviour
